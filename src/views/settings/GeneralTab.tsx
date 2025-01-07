@@ -1,68 +1,47 @@
 import React from "react";
+import SelectGroupTwo from "../../components/Forms/SelectGroup/SelectCountry";
+import TextField from "../../components/Forms/TextField/TextField";
 
 const GeneralTab: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-lg font-medium">Profile</h2>
-        <div className="grid grid-cols-2 gap-6 mt-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-500">Full name</label>
-            <input
-              type="text"
-              placeholder="Your full name"
-              className="w-full border-gray-300 rounded-lg p-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-500">Username</label>
-            <input
-              type="text"
-              placeholder="Your username"
-              className="w-full border-gray-300 rounded-lg p-2"
-            />
-          </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-500 mt-4">
+            Full name
+          </label>
+          <TextField type="text" placeholder="Enter your full name" />
         </div>
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div>
-            <label className="block text-sm font-medium text-gray-500">Profession</label>
-            <select className="w-full border-gray-300 rounded-lg p-2">
-              <option>Select your title</option>
-            </select>
+            <label className="block text-sm font-medium text-gray-500">
+              Number Phone
+            </label>
+            <TextField type="text" placeholder="Enter your phone number" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">Location</label>
-            <select className="w-full border-gray-300 rounded-lg p-2">
-              <option>Select your location</option>
-            </select>
+            <label className="block text-sm font-medium text-gray-500">
+              Location
+            </label>
+            <SelectGroupTwo />
           </div>
-        </div>
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-500">Bio</label>
-          <textarea
-            placeholder="Input text"
-            className="w-full border-gray-300 rounded-lg p-2"
-          />
         </div>
       </div>
       <div>
         <h2 className="text-lg font-medium">Account</h2>
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div>
-            <label className="block text-sm font-medium text-gray-500">Email</label>
-            <input
-              type="email"
-              placeholder="example.email@gmail.com"
-              className="w-full border-gray-300 rounded-lg p-2"
-            />
+            <label className="block text-sm font-medium text-gray-500">
+              Email
+            </label>
+            <TextField type="email" placeholder="Enter your email" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">Password</label>
-            <input
-              type="password"
-              placeholder="********"
-              className="w-full border-gray-300 rounded-lg p-2"
-            />
+            <label className="block text-sm font-medium text-gray-500">
+              Password
+            </label>
+            <TextField type="password" placeholder="Enter your password" />
           </div>
         </div>
       </div>
