@@ -9,6 +9,8 @@ import SignUp from "../views/admin/Authentication/SignUp";
 import FormElements from "../views/admin/Form/FormElements";
 import Tables from "../views/admin/table/Tables";
 import Settings from "../views/admin/Settings";
+import PostService from "../views/mitra/PostService";
+import UserSettings from "../views/settings/UserSettings";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +25,9 @@ const AppRoutes = () => {
         <Route path="/tables" element={<Tables />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
+
+      <Route path="/post-service" element={<PostService />} />
+      <Route path="/user-settings" element={<UserSettings />} />
 
       {/* Rute publik */}
       <Route path="/auth" element={<PublicRoute />}>
