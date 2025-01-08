@@ -80,14 +80,14 @@ const Navbar: React.FC<ContentProps> = ({
         id={idSection}
         className="bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/img/background_indonesia.png')`,
+          backgroundImage: `url('/img/background.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
           backgroundAttachment: "fixed",
         }}
       >
         <div className="lg:px-20 h-screen flex flex-col sm:flex-row justify-center items-center px-4 sm:px-8">
-          <div className="w-full sm:w-1/2 text-center sm:text-left text-slate-900">
+          <div className="w-full sm:w-1/2 sm:text-left text-slate-900">
             <h1 className="text-2xl sm:text-4xl font-semibold">
               {contentHead}
             </h1>
@@ -101,15 +101,14 @@ const Navbar: React.FC<ContentProps> = ({
               {textButton}
             </a>
           </div>
-   
-            <div className="hidden md:flex w-full sm:w-1/2  justify-center sm:justify-end">
-              <img
-                src="img/py.png"
-                alt="E-Learning Illustration"
-                className="w-full max-w-sm sm:max-w-md"
-              />
-            </div>
-   
+
+          <div className="hidden md:flex w-full sm:w-1/2  justify-center sm:justify-end">
+            <img
+              src="img/py.png"
+              alt="E-Learning Illustration"
+              className="w-full max-w-sm sm:max-w-md"
+            />
+          </div>
         </div>
       </section>
     </>
