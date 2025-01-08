@@ -10,6 +10,8 @@ import Settings from "../views/admin/Settings";
 import PostService from "../views/user/PostService";
 import UserSettings from "../views/settings/UserSettings";
 import Home from "../views/Home";
+import DetailService from "../views/user/DetailService";
+import Checkout from "../views/user/Checkout/Checkout";
 
 const AppRoutes = () => {
   return (
@@ -24,6 +26,8 @@ const AppRoutes = () => {
       <Route path="/user" element={<UserRoute />}>
         <Route path="post-service" element={<PostService />} />
         <Route path="user-settings" element={<UserSettings />} />
+        <Route path="details" element={<DetailService />} />
+        <Route path="checkout" element={<Checkout />} />
       </Route>
 
       <Route path="/admin" element={<AdminRoute />}>
