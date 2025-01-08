@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa";
 import TextField from "../../components/Forms/TextField/TextField";

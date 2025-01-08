@@ -1,11 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router";
-import { ArrowLeftIcon } from "@heroicons/react/24/solid"; // Heroicons
+import { FaArrowLeft } from "react-icons/fa";
 
-const Detail: React.FC = () => {
-  const navigate = useNavigate();
-
-  // Order Item Data
+const Orders: React.FC = () => {
   const orderItems = [
     {
       title: "Guitar Tuning",
@@ -60,21 +55,12 @@ const Detail: React.FC = () => {
 
   return (
     <>
-      <div className="w-full backdrop-blur fixed bg-transparent py-4 px-6">
-        <button
-          onClick={() => navigate("/login")}
-          className="flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-800"
-        >
-          <ArrowLeftIcon className="w-5 h-5" />
-          Back to Home
-        </button>
-      </div>
-      <div className="bg-zinc-300 min-h-screen p-4 flex justify-center items-center">
-        <div className="bg-gray-100 mt-16 p-6 rounded-lg shadow-lg max-w-4xl w-full">
-          <h2 className="text-2xl md:text-4xl font-bold mb-6 text-zinc-700">
-            Your Orders
-          </h2>
-
+      <div className="flex justify-center items-center m-4">
+        <div className="mt-4 p-6 rounded-lg shadow-md max-w-4xl w-full">
+          <div className="flex items-center mb-4">
+            <FaArrowLeft className="mr-2" />
+            <h1 className="text-xl font-bold">Your Orders</h1>
+          </div>
           {/* Order Cards */}
           <div className="space-y-6">
             {orderItems.map((item, index) => (
@@ -116,4 +102,4 @@ const Detail: React.FC = () => {
   );
 };
 
-export default Detail;
+export default Orders;

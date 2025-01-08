@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.pagination {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.page-link,
+.prev-link,
+.next-link {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.page-link:hover,
+.prev-link:hover,
+.next-link:hover {
+    background-color: #f8f9fa;
+}
+
+.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
