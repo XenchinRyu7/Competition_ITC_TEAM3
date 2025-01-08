@@ -12,6 +12,8 @@ import UserSettings from "../views/settings/UserSettings";
 import Home from "../views/Home";
 import DetailService from "../views/user/DetailService";
 import Checkout from "../views/user/Checkout/Checkout";
+import Orders from "../views/user/Orders";
+import ListService from "../views/user/ListService";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +30,8 @@ const AppRoutes = () => {
         <Route path="user-settings" element={<UserSettings />} />
         <Route path="details" element={<DetailService />} />
         <Route path="checkout" element={<Checkout />} />
+        <Route path="list-service" element={<ListService />} />
+        <Route path="orders" element={<Orders />} />
       </Route>
 
       <Route path="/admin" element={<AdminRoute />}>
