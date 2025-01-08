@@ -101,15 +101,15 @@ const Navbar: React.FC<ContentProps> = ({
               {textButton}
             </a>
           </div>
-          {imageSrc && (
+   
             <div className="hidden md:flex w-full sm:w-1/2  justify-center sm:justify-end">
               <img
-                src={imageSrc}
+                src="img/py.png"
                 alt="E-Learning Illustration"
                 className="w-full max-w-sm sm:max-w-md"
               />
             </div>
-          )}
+   
         </div>
       </section>
     </>

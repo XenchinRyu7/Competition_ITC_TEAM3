@@ -13,7 +13,7 @@ const Home = () => {
       <Navbar
         contentHead="Skill Bride"
         description="Platform yang mempertemukan kebutuhan masyarakat dengan keterampilan komunitas lokal, seperti jasa perbaikan, kerajinan, atau pendidikan."
-        imageSrc="/img/tools_3d.svg"
+        // imageSrc="/img/tools_3d.svg"
         idSection="#cource"
         buttonLink=""
         textButton="Join Now"
