@@ -5,36 +5,36 @@ const Card: React.FC = () => {
   const cardsData = [
     {
       id: 1,
-      image: "/img/dua.jpeg",
+      image: "/img/orang-kerja1.jpg",
       title: "Website Operational-app 1",
       description:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
     },
     {
       id: 2,
-      image: "/img/dua.jpeg",
+      image: "/img/orang-kerja2.jpg",
       title: "Website Operational-app 2",
       description:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
     },
     {
       id: 3,
-      image: "/img/dua.jpeg",
+      image: "/img/orang-kerja1.jpg",
       title: "Website Operational-app 3",
       description:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
     },
-    {
-      id: 4,
-      image: "/img/dua.jpeg",
-      title: "Website Operational-app 4",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
-    },
+    // {
+    //   id: 4,
+    //   image: "/img/dua.jpeg",
+    //   title: "Website Operational-app 4",
+    //   description:
+    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
+    // },
   ];
 
   return (
-    <div className="bg-blue-50 text-gray-800 py-10 px-4">
+    <div className="bg-blue-50 text-gray-800 py-10 px-4 lg:px-18">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -62,7 +62,7 @@ const Card: React.FC = () => {
               <h3 className="font-semibold text-dark mb-3 text-xl hover:text-primary truncate">
                 {card.title}
               </h3>
-              <p className="font-medium text-base text-secondary mb-6">
+              <p className="font-normal text-base text-zinc-800 mb-6">
                 {card.description}
               </p>
               <a

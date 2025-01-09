@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <>
       <div className="pt-24 pb-12 bg-zinc-950">
-        <div className="container">
-          <div className="flex flex-wrap ml-3">
+        <div className="container max-w-6xl mx-auto">
+          <div className="flex flex-wrap ">
             <div className="w-full px-4 mb-12 text-slate-300 font-medium md:w-1/3">
               <h2 className="font-bold text-4xl text-white mb-5">
                 SkillBridge
@@ -18,7 +18,7 @@ const Footer = () => {
                 atau pendidikan.
               </p>
             </div>
-            <div className="w-full px-4 mb-12 md:w-1/3 ">
+            <div className="w-full px-4 mb-12  md:w-1/3">
               <h3 className="font-semibold text-slate-300 mb-5 text-xl">
                 Fitur Kami
               </h3>
@@ -28,7 +28,7 @@ const Footer = () => {
                     href="#"
                     className="inline-block text-base hover:text-primary mb-3"
                   >
-                    Profil penyedia jasa dengan ulasan.
+                    Testimoni
                   </a>
                 </li>
                 <li>
@@ -36,7 +36,7 @@ const Footer = () => {
                     href="#"
                     className="inline-block text-base hover:text-primary mb-3"
                   >
-                    Sistem booking dan pembayaran.
+                    Booking
                   </a>
                 </li>
                 <li>
@@ -44,14 +44,22 @@ const Footer = () => {
                     href="#"
                     className="inline-block text-base hover:text-primary mb-3"
                   >
-                    Kategori keterampilan berbasis wilayah.
+                    Payment
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="inline-block text-base hover:text-primary mb-3"
+                  >
+                    Near Location
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="w-full px-4 mb-12 md:w-1/3 ">
+            <div className="w-full px-4 mb-12 md:w-1/3">
               <h3 className="font-semibold text-white mb-5 text-xl">
-                Kategorin Tulisan
+                Navigasi
               </h3>
               <ul className="text-slate-300 text-sm">
                 <li>
