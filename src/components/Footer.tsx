@@ -4,8 +4,8 @@ import Navbar from "./Navbar";
 const Footer = () => {
   return (
     <>
-      <div className="pt-24 pb-12 bg-zinc-950">
-        <div className="container max-w-6xl mx-auto">
+      <footer className="pt-24 pb-12 overflow-x-hidden bg-zinc-950">
+        <div className="container px-2 max-w-6xl mx-auto">
           <div className="flex flex-wrap ">
             <div className="w-full px-4 mb-12 text-slate-300 font-medium md:w-1/3">
               <h2 className="font-bold text-4xl text-white mb-5">
@@ -89,7 +89,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#clients"
-                    className="inline-block text-base hover:text-primary mb-3"
+                    className="inline-block text-base hover:text-blue-800 mb-3"
                   >
                     Clients
                   </a>
@@ -103,7 +103,7 @@ const Footer = () => {
               <a
                 href="#"
                 target="_blank"
-                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-primary text-white hover:text-white"
+                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-blue-800 text-white hover:text-white"
               >
                 <svg
                   role="img"
@@ -124,7 +124,7 @@ const Footer = () => {
               <a
                 href="#"
                 target="_blank"
-                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-primary text-white hover:text-white"
+                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-blue-800 text-white hover:text-white"
               >
                 <svg
                   role="img"
@@ -140,7 +140,7 @@ const Footer = () => {
               <a
                 href="#"
                 target="_blank"
-                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-primary  text-white hover:text-white"
+                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-blue-800  text-white hover:text-white"
               >
                 <svg
                   role="img"
@@ -156,7 +156,7 @@ const Footer = () => {
               <a
                 href="#"
                 target="_blank"
-                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-primary  text-white hover:text-white"
+                className="w-9 h-9 mr-3 flex rounded-full items-center border justify-center border-secondary hover:border-primary hover:bg-blue-800  text-white hover:text-white"
               >
                 <svg
                   role="img"
@@ -176,7 +176,7 @@ const Footer = () => {
             Dibuat Oleh Tim SKillBridge
           </p>
         </div>
-      </div>
+      </footer>
     </>
   );
 };
