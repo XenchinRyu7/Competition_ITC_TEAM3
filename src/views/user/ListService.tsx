@@ -70,7 +70,11 @@ const ListService: React.FC = () => {
                   className="bg-white shadow-md rounded-lg p-4 border border-gray-200 cursor-pointer hover:shadow-lg"
                 >
                   <div className="w-full h-48 bg-gray-300 rounded-lg flex justify-center items-center mb-4">
-                    <span className="text-gray-500 text-sm">Image</span>
+                    <img
+                      src={item.image_url_full}
+                      alt="Service"
+                      className="w-full h-auto rounded-lg"
+                    />
                   </div>
                   <div className="flex justify-between">
                     <p className="text-lg font-bold text-gray-800">

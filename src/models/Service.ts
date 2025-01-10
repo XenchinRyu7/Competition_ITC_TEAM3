@@ -5,8 +5,8 @@ export interface Service {
   tittle: string;
   description: string;
   price: string;
+  image_url_full: string;
   image_url: string;
-  image_full_url: string;
   created_at: string;
   updated_at: string;
   user: User;

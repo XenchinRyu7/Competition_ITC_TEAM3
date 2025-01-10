@@ -44,7 +44,7 @@ const DetailService: React.FC = () => {
         <div className="md:w-5/6">
           <img
             src={
-              detailService.image_full_url ||
+              detailService.image_url_full ||
               "https://via.placeholder.com/800x400"
             }
             alt="Service"
@@ -94,9 +94,7 @@ const DetailService: React.FC = () => {
           Rp{" "}
           {detailService.price ? detailService.price.toLocaleString() : "N/A"}
         </p>
-        <div className="w-full text-primary py-2 flex items-center">
-          Book Now
-        </div>
+        <div className="w-full text-primary py-2 flex items-center">Book Now</div>
         <DatePickerOne />
         <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-5">
           Checkout
