@@ -28,7 +28,7 @@ const AppRoutes = () => {
       <Route path="/user" element={<UserRoute />}>
         <Route path="post-service" element={<PostService />} />
         <Route path="user-settings" element={<UserSettings />} />
-        <Route path="details" element={<DetailService />} />
+        <Route path="detail/:id" element={<DetailService />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="list-service" element={<ListService />} />
         <Route path="orders" element={<Orders />} />

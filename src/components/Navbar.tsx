@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import DarkModeSwitcher from "./Header/DarkModeSwitcher";
+import DropdownNotification from "./Header/DropdownNotification";
+import DropdownMessage from "./Header/DropdownMessage";
+import DropdownUser from "./Header/DropdownUser";
+import { useAuth } from "../hooks/useAuth"; // Import useAuth hook
 
 const Navbar: React.FC = () => {
+  const { isAuthenticated } = useAuth(); // Ambil status autentikasi
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -11,6 +17,7 @@ const Navbar: React.FC = () => {
           <div className="text-slate-900 font-bold text-xl sm:text-2xl">
             SkilBridge
           </div>
+          {/* Tombol Hamburger */}
           <div className="sm:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -37,6 +44,32 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="hidden sm:flex space-x-4">
+            {!isAuthenticated ? (
+              <>
+                <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
+                  <Link to="/auth/signin" className="text-primary">
+                    Sign-in
+                  </Link>
+                </button>
+                <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
+                  Sign-up
+                </button>
+              </>
+            ) : (
+              <div className="flex items-center gap-3 2xsm:gap-7">
+                {/* Menampilkan fitur jika sudah login */}
+                <ul className="flex items-center gap-2 2xsm:gap-4">
+                  <DarkModeSwitcher />
+                  <DropdownNotification />
+                </ul>
+                <DropdownUser />
+              </div>
+            )}
+          </div>
+        </div>
+        {/* Menu Responsif */}
+        {menuOpen && !isAuthenticated && (
+          <div className="sm:hidden flex flex-col items-center space-y-4">
             <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
               <Link to="/auth/signin" className="text-primary">
                 Sign-in
@@ -46,18 +79,15 @@ const Navbar: React.FC = () => {
               Sign-up
             </button>
           </div>
-        </div>
-        {menuOpen && (
-          <div className="mt-4 flex flex-col space-y-2 sm:hidden">
-            <a href="#home" className="text-black text-sm">
-              Home
-            </a>
-            <a href="#features" className="text-black text-sm">
-              Features
-            </a>
-            <a href="#about" className="text-black text-sm">
-              About
-            </a>
+        )}
+        {/* Menu Responsif untuk yang sudah login */}
+        {menuOpen && isAuthenticated && (
+          <div className="sm:hidden flex flex-col items-center space-y-4">
+            <ul className="flex items-center gap-2 2xsm:gap-4">
+              <DarkModeSwitcher />
+              <DropdownNotification />
+            </ul>
+            <DropdownUser />
           </div>
         )}
       </header>

@@ -10,7 +10,7 @@ const Carousel: React.FC = () => {
     { image: "/img/dua.jpeg",},
     { image: "/img/dua.jpeg",},
     { image: "/img/dua.jpeg",}
-  ]; // Array berisi objek dengan gambar lokal
+  ];
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -43,7 +43,7 @@ const Carousel: React.FC = () => {
           <div
             className="flex transition-transform duration-500 space-x-4"
             style={{
-              transform: `translateX(-${currentIndex * (100 / 3)}%)`, // Geser tiap kartu lebih kecil
+              transform: `translateX(-${currentIndex * (100 / 3)}%)`,
               width: `${cards.length * (100 / 3)}%`,
             }}
           >

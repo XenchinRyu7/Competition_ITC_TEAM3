@@ -1,38 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useService } from "../hooks/useService";
+import { Service } from "../models/Service";
 
 const Card: React.FC = () => {
-  // Data untuk card (gambar dan teks)
-  const cardsData = [
-    {
-      id: 1,
-      image: "/img/dua.jpeg",
-      title: "Website Operational-app 1",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
-    },
-    {
-      id: 2,
-      image: "/img/dua.jpeg",
-      title: "Website Operational-app 2",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
-    },
-    {
-      id: 3,
-      image: "/img/dua.jpeg",
-      title: "Website Operational-app 3",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
-    },
-    {
-      id: 4,
-      image: "/img/dua.jpeg",
-      title: "Website Operational-app 4",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit quis fuga.",
-    },
-  ];
+  const { service, loading, error, getAllService } = useService();
 
+  useEffect(() => {
+    getAllService();
+  }, []);
   return (
     <div className="bg-blue-50 text-gray-800 py-10 px-4">
       {/* Header */}
@@ -46,24 +21,28 @@ const Card: React.FC = () => {
         </p>
       </div>
 
+      {/* Loading dan Error */}
+      {loading && <p className="text-center text-gray-600">Loading...</p>}
+      {error && <p className="text-center text-red-600">{error}</p>}
+
       {/* Card Container */}
       <div className="flex flex-wrap justify-center gap-6">
-        {cardsData.map((card) => (
+        {service?.map((item: Service) => (
           <div
-            key={card.id}
+            key={item.id}
             className="w-full sm:w-72 md:w-64 lg:w-72 bg-white rounded-xl shadow-lg overflow-hidden"
           >
             <img
-              src={card.image}
-              alt={`Image for ${card.title}`}
+              src="/img/dua.jpeg" // Ganti dengan properti gambar jika tersedia
+              alt={`Image for ${item.tittle}`}
               className="w-full h-48 object-cover"
             />
             <div className="py-8 px-4">
               <h3 className="font-semibold text-dark mb-3 text-xl hover:text-primary truncate">
-                {card.title}
+                {item.tittle}
               </h3>
               <p className="font-medium text-base text-secondary mb-6">
-                {card.description}
+                {item.description}
               </p>
               <a
                 href="#"
@@ -75,6 +54,11 @@ const Card: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {/* Jika tidak ada data */}
+      {!loading && !error && service?.length === 0 && (
+        <p className="text-center text-gray-600">No services available.</p>
+      )}
     </div>
   );
 };

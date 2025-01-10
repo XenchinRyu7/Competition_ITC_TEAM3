@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
     password: "",
   });
 
-  const { login, loading, error, success } = useAuth();
+  const { login, loading, error, success, isAuthenticated } = useAuth();
 
   const validate = () => {
     const tempErrors = { ...errors };
@@ -81,11 +81,13 @@ const SignIn: React.FC = () => {
         showAlert(success, "success");
       } else if (error) {
         showAlert(error, "error");
-      } else {
-        showAlert("An unknown error occurred.", "error");
       }
     }
   };
+
+  if (isAuthenticated) {
+    window.location.href = "/user/list-service";
+  }
 
   return (
     <div className="relative">

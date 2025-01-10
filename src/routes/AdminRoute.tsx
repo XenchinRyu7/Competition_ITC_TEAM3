@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import AdminLayout from "../layout/AdminLayout";
-import { useAuth } from "../context/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 const AdminRoute: React.FC = () => {
   const { isAuthenticated } = useAuth();

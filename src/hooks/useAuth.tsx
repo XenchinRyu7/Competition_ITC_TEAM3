@@ -16,6 +16,9 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    !!localStorage.getItem("access_token")
+  );
 
   const register = async (data: {
     name: string;
@@ -48,6 +51,7 @@ export const useAuth = () => {
       setUser(response.user);
       localStorage.setItem("access_token", response.access_token);
       setSuccess("User logged in successfully");
+      setIsAuthenticated(true);
     } catch (err) {
       const apiError = err as ApiError;
       setError(apiError.response?.data?.message || "Error logging in");
@@ -56,5 +60,20 @@ export const useAuth = () => {
     }
   };
 
-  return { user, loading, error, register, login, success };
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  return {
+    user,
+    loading,
+    error,
+    register,
+    login,
+    logout,
+    success,
+    isAuthenticated,
+  };
 };
