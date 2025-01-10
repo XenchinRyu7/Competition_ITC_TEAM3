@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeSwitcher from "./Header/DarkModeSwitcher";
 import DropdownNotification from "./Header/DropdownNotification";
-import DropdownMessage from "./Header/DropdownMessage";
 import DropdownUser from "./Header/DropdownUser";
-import { useAuth } from "../hooks/useAuth"; // Import useAuth hook
-
+import { useAuth } from "../hooks/useAuth";
 const Navbar: React.FC = () => {
-  const { isAuthenticated } = useAuth(); // Ambil status autentikasi
+  const { isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
-      <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-md bg-white">
+      <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-2xl backdrop-blur fixed overflow-hidden">
         <div className="flex items-center justify-between lg:px-10">
-          <div className="text-slate-900 font-bold text-xl sm:text-2xl">
+          <div className="text-white font-bold text-xl sm:text-2xl">
             SkilBridge
           </div>
           {/* Tombol Hamburger */}
@@ -43,7 +41,7 @@ const Navbar: React.FC = () => {
               </svg>
             </button>
           </div>
-          <div className="hidden sm:flex space-x-4">
+          <div className="hidden sm:flex space-x-2">
             {!isAuthenticated ? (
               <>
                 <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
@@ -70,13 +68,13 @@ const Navbar: React.FC = () => {
         {/* Menu Responsif */}
         {menuOpen && !isAuthenticated && (
           <div className="sm:hidden flex flex-col items-center space-y-4">
-            <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
-              <Link to="/auth/signin" className="text-primary">
-                Sign-in
+            <button className="bg-blue-900 text-white font-medium px-8 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
+              <Link to="/auth/signin">
+                Login
               </Link>
             </button>
-            <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
-              Sign-up
+            <button className="bg-blue-50 text-blue-500 font-medium px-6 py-2 rounded-full text-sm sm:text-base hover:bg-blue-900 hover:text-white">
+              Register
             </button>
           </div>
         )}

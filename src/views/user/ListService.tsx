@@ -36,7 +36,7 @@ const ListService: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-20 pb-6 px-4 md:px-6">
+    <div className="bg-slate-100 md:mt-2 min-h-screen pt-20 pb-6 px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
           All Service

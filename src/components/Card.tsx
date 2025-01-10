@@ -9,7 +9,7 @@ const Card: React.FC = () => {
     getAllService();
   }, []);
   return (
-    <div className="bg-blue-50 text-gray-800 py-10 px-4">
+    <div className="bg-blue-50 text-gray-800 py-10 px-4 lg:px-18">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -41,7 +41,7 @@ const Card: React.FC = () => {
               <h3 className="font-semibold text-dark mb-3 text-xl hover:text-primary truncate">
                 {item.tittle}
               </h3>
-              <p className="font-medium text-base text-secondary mb-6">
+              <p className="font-normal text-base text-zinc-800 mb-6">
                 {item.description}
               </p>
               <a
