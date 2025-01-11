@@ -2,7 +2,7 @@ export interface Service {
   id: number;
   user_id: number;
   category_id: number;
-  tittle: string;
+  title: string;
   description: string;
   price: string;
   image_url_full: string;
@@ -10,9 +10,15 @@ export interface Service {
   created_at: string;
   updated_at: string;
   user: User;
+  category: Category;
 }
 
 export interface User {
   name: string;
   address: string;
+}
+
+export interface Category {
+  id: number;
+  name: string;
 }

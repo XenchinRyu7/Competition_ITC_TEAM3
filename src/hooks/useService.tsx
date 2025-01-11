@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { getAllServices, getDetailService } from "../services/service";
+import {
+  getAllServices,
+  getDetailService,
+  createService,
+  updateService,
+  deleteService,
+} from "../services/services";
 import { Service } from "../models/Service";
 
 interface ApiError {
@@ -11,29 +17,26 @@ interface ApiError {
 }
 
 export const useService = () => {
-  const [service, setService] = useState<Service[]>([]);
+  const [services, setService] = useState<Service[]>([]);
+  const [detailService, setDetailService] = useState<Service | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
-  const [detailService, setDetailService] = useState<Service>();
 
   const getAllService = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await getAllServices();
-      console.log("Response from API:", response);
-      if (response && response.data) {
+      if (response?.data) {
         setService(response.data);
-        setSuccess("Get Service Successfully");
+        setSuccess("Services fetched successfully.");
       } else {
-        console.error("Service data is missing or undefined");
+        console.error("No service data available.");
       }
     } catch (err) {
       const apiError = err as ApiError;
-      console.error("Error fetching services:", err);
-      setError(apiError.response?.data?.message || "Error Get Service");
+      setError(apiError.response?.data?.message || "Failed to fetch services.");
     } finally {
       setLoading(false);
     }
@@ -44,21 +47,81 @@ export const useService = () => {
     setError(null);
     try {
       const response = await getDetailService(id);
-      console.log("Response from API:", response);
-      if (response && response.data) {
+      if (response?.data) {
         setDetailService(response.data);
-        setSuccess("Get Service Detail Successfully");
+        setSuccess("Service detail fetched successfully.");
       } else {
-        console.error("Service detail data is missing or undefined");
+        console.error("No service detail available.");
       }
     } catch (err) {
       const apiError = err as ApiError;
-      console.error("Error fetching service detail:", err);
-      setError(apiError.response?.data?.message || "Error Get Service Detail");
+      setError(
+        apiError.response?.data?.message || "Failed to fetch service detail."
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  return { service, loading, error, success, getAllService, getServiceDetail, detailService };
+  const createNewService = async (data: Partial<Service>) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await createService(data);
+      if (response?.data) {
+        setSuccess("Service created successfully.");
+        getAllService();
+      }
+    } catch (err) {
+      const apiError = err as ApiError;
+      setError(apiError.response?.data?.message || "Failed to create service.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateExistingService = async (id: number, data: Partial<Service>) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await updateService(id, data);
+      if (response?.data) {
+        setSuccess("Service updated successfully.");
+        getAllService(); // Refresh list after update
+      }
+    } catch (err) {
+      const apiError = err as ApiError;
+      setError(apiError.response?.data?.message || "Failed to update service.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removeService = async (id: number) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await deleteService(id);
+      setSuccess("Service deleted successfully.");
+      getAllService(); // Refresh list after deletion
+    } catch (err) {
+      const apiError = err as ApiError;
+      setError(apiError.response?.data?.message || "Failed to delete service.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    services,
+    detailService,
+    loading,
+    error,
+    success,
+    getAllService,
+    getServiceDetail,
+    createNewService,
+    updateExistingService,
+    removeService,
+  };
 };

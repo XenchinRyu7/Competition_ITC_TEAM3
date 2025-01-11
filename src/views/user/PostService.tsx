@@ -20,7 +20,7 @@ const PostService: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto mt-20">
       <div className="flex items-center mb-4">
         <FaArrowLeft className="mr-2" />
         <h1 className="text-xl font-bold">Post Service</h1>

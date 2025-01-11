@@ -4,6 +4,7 @@ import { Service } from "../models/Service";
 
 const Card: React.FC = () => {
   const { service, loading, error, getAllService } = useService();
+  const limitedService = service?.slice(0, 4);
 
   useEffect(() => {
     getAllService();
@@ -27,13 +28,13 @@ const Card: React.FC = () => {
 
       {/* Card Container */}
       <div className="flex flex-wrap justify-center gap-6">
-        {service?.map((item: Service) => (
+        {limitedService?.map((item: Service) => (
           <div
             key={item.id}
             className="w-full sm:w-72 md:w-64 lg:w-72 bg-white rounded-xl shadow-lg overflow-hidden"
           >
             <img
-              src="/img/dua.jpeg" // Ganti dengan properti gambar jika tersedia
+              src={item.image_url_full} // Ganti dengan properti gambar jika tersedia
               alt={`Image for ${item.tittle}`}
               className="w-full h-48 object-cover"
             />
@@ -44,12 +45,6 @@ const Card: React.FC = () => {
               <p className="font-normal text-base text-zinc-800 mb-6">
                 {item.description}
               </p>
-              <a
-                href="#"
-                className="font-medium text-sm bg-blue-500 py-2 px-4 text-white rounded-lg hover:opacity-80"
-              >
-                Baca Selengkapnya
-              </a>
             </div>
           </div>
         ))}

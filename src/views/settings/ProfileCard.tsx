@@ -1,12 +1,13 @@
 import React from "react";
 import { FaRegCopy } from "react-icons/fa";
+import UserOne from "../../assets/images/user/user-01.png";
 
 const ProfileCard: React.FC = () => {
   return (
     <div className="w-full bg-white shadow rounded-lg p-4">
       <div className="flex flex-col items-center">
         <img
-          src="https://via.placeholder.com/80"
+          src={UserOne}
           alt="Profile"
           className="w-20 h-20 rounded-full object-cover"
         />

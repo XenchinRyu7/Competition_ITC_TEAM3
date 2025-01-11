@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { CiCalendarDate } from "react-icons/ci";
 import TextField from "../../components/Forms/TextField/TextField";
 import TextArea from "../../components/Forms/TextArea/TextArea";
 import { useService } from "../../hooks/useService";
@@ -19,7 +18,9 @@ const DetailService: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    <div className="flex items-center justify-center h-screen">
+      <div className="text-black">Loading...</div>
+    </div>;
   }
 
   if (error) {
@@ -31,7 +32,7 @@ const DetailService: React.FC = () => {
   }
 
   return (
-    <div className="md:flex py-10 bg-gray-100 gap-6 p-6 ">
+    <div className="md:flex py-10 bg-gray-100 gap-6 p-6 mt-15">
       <div className="w-full md:w-2/3 max-w-6xl bg-white rounded-lg p-6 md:flex gap-6 border border-gray-200">
         {/* Image Section */}
         <div className="md:w-1/6">
@@ -52,7 +53,7 @@ const DetailService: React.FC = () => {
           />
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Nama Jasa</h2>
-            <TextField type="text" value={detailService.tittle} readOnly />
+            <TextField type="text" value={detailService.title} readOnly />
           </div>
           <div className="mt-4">
             <h3 className="text-lg font-medium">Nama Penyedia</h3>
@@ -66,7 +67,7 @@ const DetailService: React.FC = () => {
             <h3 className="text-lg font-medium">Category</h3>
             <TextField
               type="text"
-              value={detailService.category_id || "N/A"}
+              value={detailService.category?.name || "N/A"}
               readOnly
             />
           </div>
@@ -74,7 +75,7 @@ const DetailService: React.FC = () => {
             <h3 className="text-lg font-medium">Location</h3>
             <TextField
               type="text"
-              value={detailService.user.address || "N/A"}
+              value={detailService.user?.address || "N/A"}
               readOnly
             />
           </div>
@@ -94,7 +95,9 @@ const DetailService: React.FC = () => {
           Rp{" "}
           {detailService.price ? detailService.price.toLocaleString() : "N/A"}
         </p>
-        <div className="w-full text-primary py-2 flex items-center">Book Now</div>
+        <div className="w-full text-primary py-2 flex items-center">
+          Book Now
+        </div>
         <DatePickerOne />
         <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-5">
           Checkout

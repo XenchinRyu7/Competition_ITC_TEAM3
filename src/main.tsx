@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router";
 import App from "./App.tsx";
 import "./css/style.css";
 import "flatpickr/dist/flatpickr.min.css";
+import "flowbite";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>

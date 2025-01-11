@@ -21,7 +21,8 @@ const SignIn: React.FC = () => {
     password: "",
   });
 
-  const { login, loading, error, success, isAuthenticated } = useAuth();
+  const { login, loading, error, success, isAuthenticated, getRole, getToken } =
+    useAuth();
 
   const validate = () => {
     const tempErrors = { ...errors };
@@ -86,7 +87,14 @@ const SignIn: React.FC = () => {
   };
 
   if (isAuthenticated) {
-    window.location.href = "/user/list-service";
+    const role = getRole();
+    if (role === "admin") {
+      window.location.href = "/admin";
+    } else if (role === "user") {
+      window.location.href = "/user/list-service";
+    } else {
+      console.error("Unknown role:", role);
+    }
   }
 
   return (

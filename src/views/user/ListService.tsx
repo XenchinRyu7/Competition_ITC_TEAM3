@@ -7,17 +7,17 @@ import { Service } from "../../models/Service";
 const ListService: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const itemsPerPage = 6;
+  const itemsPerPage = 9;
 
-  const { service, loading, error, getAllService } = useService();
+  const { services, loading, error, getAllService } = useService();
   const navigate = useNavigate();
 
   useEffect(() => {
     getAllService();
   }, []);
 
-  const filteredItems = service.filter((item) =>
-    item.tittle.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredItems = services.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
@@ -67,26 +67,28 @@ const ListService: React.FC = () => {
                 <div
                   key={item.id}
                   onClick={() => handleCardClick(item.id)}
-                  className="bg-white shadow-md rounded-lg p-4 border border-gray-200 cursor-pointer hover:shadow-lg"
+                  className="bg-white shadow-md rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg"
                 >
-                  <div className="w-full h-48 bg-gray-300 rounded-lg flex justify-center items-center mb-4">
+                  <div className="w-full bg-gray-300 rounded-lg flex justify-center items-center mb-4">
                     <img
                       src={item.image_url_full}
                       alt="Service"
-                      className="w-full h-auto rounded-lg"
+                      className="w-full rounded-lg"
                     />
                   </div>
-                  <div className="flex justify-between">
-                    <p className="text-lg font-bold text-gray-800">
-                      Rp{item.price || "N/A"}
+                  <div className="m-4">
+                    <div className="flex justify-between">
+                      <p className="text-lg font-bold text-gray-800">
+                        Rp{item.price || "N/A"}
+                      </p>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-800">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-2">
+                      {item.description || "No description available."}
                     </p>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800">
-                    {item.tittle}
-                  </h3>
-                  <p className="text-sm text-gray-500 mt-2">
-                    {item.description || "No description available."}
-                  </p>
                 </div>
               ))
             ) : (

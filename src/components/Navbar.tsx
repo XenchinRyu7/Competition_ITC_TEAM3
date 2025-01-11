@@ -8,14 +8,15 @@ const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  
+
   return (
     <>
-      <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-2xl backdrop-blur fixed overflow-hidden">
+      <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-md fixed backdrop-blur ">
         <div className="flex items-center justify-between lg:px-10">
           <div className="text-white font-bold text-xl sm:text-2xl">
             SkilBridge
           </div>
-          {/* Tombol Hamburger */}
           <div className="sm:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -55,7 +56,13 @@ const Navbar: React.FC = () => {
               </>
             ) : (
               <div className="flex items-center gap-3 2xsm:gap-7">
-                {/* Menampilkan fitur jika sudah login */}
+                <div className="block">
+                  <button className="bg-transparent font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:text-black">
+                    <Link to="/auth/signin" className="text-primary">
+                      Browse
+                    </Link>
+                  </button>
+                </div>
                 <ul className="flex items-center gap-2 2xsm:gap-4">
                   <DarkModeSwitcher />
                   <DropdownNotification />
@@ -69,9 +76,7 @@ const Navbar: React.FC = () => {
         {menuOpen && !isAuthenticated && (
           <div className="sm:hidden flex flex-col items-center space-y-4">
             <button className="bg-blue-900 text-white font-medium px-8 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
-              <Link to="/auth/signin">
-                Login
-              </Link>
+              <Link to="/auth/signin">Login</Link>
             </button>
             <button className="bg-blue-50 text-blue-500 font-medium px-6 py-2 rounded-full text-sm sm:text-base hover:bg-blue-900 hover:text-white">
               Register

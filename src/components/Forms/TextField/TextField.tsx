@@ -5,6 +5,7 @@ interface InputProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readOnly?: boolean;
+  required?: boolean;
 }
 
 const TextField: React.FC<InputProps> = ({
@@ -13,10 +14,12 @@ const TextField: React.FC<InputProps> = ({
   name,
   value,
   onChange,
-  readOnly
+  readOnly,
+  required,
 }) => {
   return (
     <input
+      required={required}
       type={type}
       placeholder={placeholder}
       name={name}
