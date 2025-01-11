@@ -3,8 +3,8 @@ import { useService } from "../hooks/useService";
 import { Service } from "../models/Service";
 
 const Card: React.FC = () => {
-  const { service, loading, error, getAllService } = useService();
-  const limitedService = service?.slice(0, 4);
+  const { services, loading, error, getAllService } = useService();
+  const limitedService = services?.slice(0, 4);
 
   useEffect(() => {
     getAllService();
@@ -35,12 +35,12 @@ const Card: React.FC = () => {
           >
             <img
               src={item.image_url_full} // Ganti dengan properti gambar jika tersedia
-              alt={`Image for ${item.tittle}`}
+              alt={`Image for ${item.title}`}
               className="w-full h-48 object-cover"
             />
             <div className="py-8 px-4">
               <h3 className="font-semibold text-dark mb-3 text-xl hover:text-primary truncate">
-                {item.tittle}
+                {item.title}
               </h3>
               <p className="font-normal text-base text-zinc-800 mb-6">
                 {item.description}
@@ -51,7 +51,7 @@ const Card: React.FC = () => {
       </div>
 
       {/* Jika tidak ada data */}
-      {!loading && !error && service?.length === 0 && (
+      {!loading && !error && services?.length === 0 && (
         <p className="text-center text-gray-600">No services available.</p>
       )}
     </div>

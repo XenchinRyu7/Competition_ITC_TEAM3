@@ -7,7 +7,7 @@ const WhyChoose: React.FC = () => {
     <>
       <section className="bg-blue-950">
         <div className="max-w-6xl mx-auto py-20 items-center flex flex-wrap justify-center">
-          <div className="w-full md:w-1/2 ">
+          <div className="w-full md:w-1/2 p-6">
             <div className="mt-6">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 Why Choose Me:
