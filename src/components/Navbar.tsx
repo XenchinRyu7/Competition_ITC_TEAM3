@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import DarkModeSwitcher from "./Header/DarkModeSwitcher";
+import DropdownNotification from "./Header/DropdownNotification";
+import DropdownUser from "./Header/DropdownUser";
+import { useAuth } from "../hooks/useAuth";
 const Navbar: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
-      <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-2xl  backdrop-blur fixed overflow-hidden">
+      <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-2xl backdrop-blur fixed"  data-aos="fade-down">
         <div className="flex items-center justify-between lg:px-10">
-          <div className="text-blue-950 font-bold text-xl sm:text-2xl">
+          <div className="text-white font-bold text-xl sm:text-2xl">
             SkilBridge
           </div>
+          {/* Tombol Hamburger */}
           <div className="sm:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -37,6 +42,31 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="hidden sm:flex space-x-2">
+            {!isAuthenticated ? (
+              <>
+                <button className="bg-blue-900 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
+                  <Link to="/auth/signin">
+                    Sign In
+                  </Link>
+                </button>
+                <button className="bg-blue-50 text-blue-900 font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950 hover:text-white">
+                  Sign Up
+                </button>
+              </>
+            ) : (
+              <div className="flex items-center gap-3 2xsm:gap-7">
+                <ul className="flex items-center gap-2 2xsm:gap-4">
+                  <DarkModeSwitcher />
+                  <DropdownNotification />
+                </ul>
+                <DropdownUser />
+              </div>
+            )}
+          </div>
+        </div>
+        {/* Menu Responsif */}
+        {menuOpen && !isAuthenticated && (
+          <div className="sm:hidden flex flex-col items-center space-y-4">
             <button className="bg-blue-900 text-white font-medium px-8 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
               <Link to="/auth/signin">
                 Login
@@ -46,18 +76,15 @@ const Navbar: React.FC = () => {
               Register
             </button>
           </div>
-        </div>
-        {menuOpen && (
-          <div className="mt-4 flex flex-col space-y-2 sm:hidden">
-            <a href="#home" className="text-black text-sm">
-              Home
-            </a>
-            <a href="#features" className="text-black text-sm">
-              Features
-            </a>
-            <a href="#about" className="text-black text-sm">
-              About
-            </a>
+        )}
+        {/* Menu Responsif untuk yang sudah login */}
+        {menuOpen && isAuthenticated && (
+          <div className="sm:hidden flex flex-col items-center space-y-4 overflow-x-hidden">
+            <ul className="flex items-center gap-2 2xsm:gap-4">
+              <DarkModeSwitcher />
+              <DropdownNotification />
+            </ul>
+            <DropdownUser />
           </div>
         )}
       </header>

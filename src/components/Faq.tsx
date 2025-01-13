@@ -9,43 +9,48 @@ const Faq = () => {
 
   return (
     <>
-      <section className="bg-slate-100">
-        <div className="min-h-screen mx-auto max-w-6xl bg-slate-100 flex flex-col md:flex-row items-center justify-center">
+      <section className="bg-slate-100 dark:bg-gray-950">
+        <div className="min-h-screen mx-auto max-w-6xl bg-slate-100 flex flex-col md:flex-row items-center justify-center dark:bg-gray-950">
           {/* FAQ Section */}
-          <div className="w-full md:w-1/2 flex justify-center pt-10">
+          <div className="w-full md:w-1/2 flex justify-center pt-10" data-aos="fade-right">
             <div className="px-4 flex flex-col justify-center">
-              <h2 className="font-semibold text-3xl mb-10 text-center md:text-left">
+              <h2 className="font-semibold text-zinc-950 text-3xl mb-10 text-center md:text-left dark:text-slate-200">
                 Frequently Asked Questions
               </h2>
-              <div className="bg-white max-w-full mx-auto border border-gray-200">
-                <ul className="shadow-box">
+              <div className="bg-white max-w-full mx-auto rounded-sm dark:bg-slate-800 dark:text-slate-200">
+                <ul className="shadow-box text-sm">
                   {[
                     {
                       id: 1,
-                      question: "Is there a refund policy?",
+                      question: "Bagaimana cara memesan layanan?",
                       answer:
-                        "DreamSeat Enterprise Xperience Partners shall issue a full refund to any member who wishes to cancel their enrolment within 45 days prior to the start of the season. Stadium seat memberships are not refundable after the first home event of the football season.",
+                        "Cukup cari layanan berdasarkan kategori atau lokasi, lihat profil penyedia, dan gunakan sistem pemesanan untuk mengamankan slot waktu.",
                     },
                     {
                       id: 2,
-                      question: "Why can't I log in?",
+                      question: "Apakah pembayaran online aman?",
                       answer:
-                        "If you are unable to log in, please make sure you have created a new account first. This ordering portal is different than the one where you purchase your Texas A&M game tickets.",
+                        "Ya, kami menggunakan gateway pembayaran tepercaya untuk memastikan semua transaksi aman dan terjamin.",
                     },
                     {
                       id: 3,
-                      question: "Why can't I log in?",
+                      question:
+                        "Bisakah saya memberikan ulasan setelah menggunakan layanan?",
                       answer:
-                        "If you are unable to log in, please make sure you have created a new account first. This ordering portal is different than the one where you purchase your Texas A&M game tickets.",
+                        "Sangat! Kami mendorong pengguna untuk memberikan umpan balik yang jujur ​​untuk membantu orang lain membuat keputusan yang tepat.",
                     },
                     {
                       id: 4,
-                      question: "Why can't I log in?",
+                      question:
+                        "Bagaimana jika saya tidak dapat menemukan penyedia di wilayah saya?",
                       answer:
-                        "If you are unable to log in, please make sure you have created a new account first. This ordering portal is different than the one where you purchase your Texas A&M game tickets.",
+                        "Anda dapat meminta layanan tertentu, dan kami akan memberi tahu Anda ketika penyedia tersedia di sekitar",
                     },
                   ].map((item) => (
-                    <li key={item.id} className="relative border-b border-gray-200">
+                    <li
+                      key={item.id}
+                      className="relative border-b border-gray-200"
+                    >
                       <button
                         type="button"
                         className="w-full px-6 py-6 text-left"
@@ -85,21 +90,21 @@ const Faq = () => {
           </div>
 
           {/* Image Section */}
-          <div className="hidden md:flex w-1/2 justify-center mt-10 md:mt-0">
+          <div className="hidden md:flex w-1/2 justify-center mt-10 md:mt-0" data-aos="fade-left">
             <div className="relative z-10 mt-10">
               {/* Front Box */}
-              <div className="w-64 h-80 mt-40 bg-white border-2 border-blue-500 rounded-lg relative">
+              <div className="w-64 h-80 mt-40 bg-white rounded-lg relative">
                 <img
-                  src="/img/orang-kerja2.jpg"
+                  src="/img/card-5.jpg"
                   alt="Front Box"
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
 
               {/* Back Box */}
-              <div className="w-64 h-80 ml-24 border-2 border-blue-500 rounded-lg absolute top-4 left-4 -z-10">
+              <div className="w-64 h-80 ml-24 rounded-lg absolute top-4 left-4 -z-10">
                 <img
-                  src="/img/orang-kerja1.jpg"
+                  src="/img/card-7.jpg"
                   alt="Back Box"
                   className="w-full h-full object-cover rounded-lg"
                 />

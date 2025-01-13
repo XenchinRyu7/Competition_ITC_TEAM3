@@ -21,7 +21,7 @@ const Orders: React.FC = () => {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, voluptas.",
       price: "Rp100.000",
-      image: "/img/orang2.jpg",
+      image: "img/background_header.png",
     },
     // Tambahkan item lainnya jika diperlukan...
   ];
@@ -44,16 +44,16 @@ const Orders: React.FC = () => {
                 className="flex flex-col sm:flex-row w-full bg-white shadow-md rounded-lg overflow-hidden"
               >
                 {/* Image Section */}
-                <div className="w-full  sm:w-2/4">
+                <div className="w-full sm:w-1/3">
                   <img
                     src={item.image}
                     alt="Order Image"
-                    className="w-full h-60 sm:h-60 object-cover" // Pastikan gambar memiliki tinggi dan lebar konsisten
+                    className="w-full h-48 sm:h-full object-cover"
                   />
                 </div>
 
                 {/* Content Section */}
-                <div className="w-full sm:w-3/5 bg-gray-100 text-zinc-950 p-4 flex flex-col justify-between">
+                <div className="w-full sm:w-2/3 bg-gray-100 text-zinc-950 p-4 flex flex-col justify-between">
                   <div>
                     <p className="text-sm text-blue-600 font-medium">In Progress</p>
                     <h3 className="text-lg md:text-xl font-semibold mt-2">
