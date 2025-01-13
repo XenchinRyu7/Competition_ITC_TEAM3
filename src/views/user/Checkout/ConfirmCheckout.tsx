@@ -1,66 +1,102 @@
 import React from "react";
+import { User } from "../../../models/user";
+import OnPayment from "../../../assets/images/transaction/on_payment.svg";
+import { Service } from "../../../models/Service";
+import { usePayment } from "../../../hooks/usePayment";
 
-const ConfirmStep: React.FC = () => {
+interface ConfirmStepProps {
+  selectedDate: string;
+  totalPrice: number;
+  servicePrice: number;
+  fee: number;
+  user: User;
+  detailService: Service;
+  handlePayment: () => void;
+  order_id: string;
+}
+
+const ConfirmStep: React.FC<ConfirmStepProps> = ({
+  selectedDate,
+  totalPrice,
+  fee,
+  user,
+  handlePayment,
+  order_id,
+  servicePrice,
+}) => {
+  const { loading } = usePayment();
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-10">
-      {/* Illustration */}
       <div className="text-center mb-8">
-        <img
-          src="https://via.placeholder.com/200x200"
-          alt="Purchase Illustration"
-          className="mx-auto"
-        />
-        <h1 className="text-2xl font-bold text-gray-800">Pay Now 🎉</h1>
+        <img src={OnPayment} alt="Purchase Illustration" className="mx-auto" />
+        <h1 className="text-2xl font-bold text-gray-800">Pay Now</h1>
         <p className="text-gray-500">
           You can choose all method payment with midtrans
         </p>
       </div>
-
-      {/* Order Details */}
-      <div className=" p-6 w-full">
-        {/* Order Summary */}
-        <div className="grid grid-cols-2 gap-4 border-b pb-4 mb-4">
-          <div>
-            <div className="flex items-center gap-2">
+      <div className="p-6 w-full max-w-lg">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-6 border-b pb-4 mb-4">
+          <div className="text-left">
+            <div className="flex items-start gap-2">
+              <span className="text-indigo-500">👤</span>
+              <p className="font-medium text-gray-700">Buyer</p>
+            </div>
+            <p className="text-gray-600">{user.name}</p>
+          </div>
+          <div className="text-left">
+            <div className="flex items-start gap-2">
+              <span className="text-purple-500">👤</span>
+              <p className="font-medium text-gray-700">Customer</p>
+            </div>
+            <p className="text-gray-600">{user?.name}</p>
+          </div>
+          <div className="text-left">
+            <div className="flex items-start gap-2">
               <span className="text-indigo-500">📅</span>
               <p className="font-medium text-gray-700">Date</p>
             </div>
-            <p className="text-gray-600">27/04/2022</p>
+            <p className="text-gray-600">
+              {new Date(selectedDate).toLocaleDateString("id-ID")}
+            </p>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-indigo-500">👤</span>
-              <p className="font-medium text-gray-700">Customer</p>
+          <div className="text-left">
+            <div className="flex items-start gap-2">
+              <span className="text-blue-500">🔢</span>
+              <p className="font-medium text-gray-700">Order ID</p>
             </div>
-            <p className="text-gray-600">John Miller</p>
+            <p className="text-gray-600 text-nowrap">{order_id}</p>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-indigo-500">💳</span>
-              <p className="font-medium text-gray-700">Payment Method</p>
+          <div className="text-left">
+            <div className="flex items-start gap-2">
+              <span className="text-blue-500">💵</span>
+              <p className="font-medium text-gray-700">Fee</p>
             </div>
-            <p className="text-gray-600">VISA</p>
+            <p className="text-gray-600">{fee}</p>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-indigo-500">🔢</span>
-              <p className="font-medium text-gray-700">Order Number</p>
+          <div className="text-left">
+            <div className="flex items-start gap-2">
+              <span className="text-green-500">💵</span>
+              <p className="font-medium text-gray-700">Service Price</p>
             </div>
-            <p className="text-gray-600">586789963</p>
+            <p className="text-xl font-bold text-gray-800">Rp {servicePrice}</p>
           </div>
-          <div className="col-span-2">
-            <div className="flex items-center gap-2">
-              <span className="text-indigo-500">💵</span>
-              <p className="font-medium text-gray-700">Total</p>
+          <div className="text-left">
+            <div className="flex items-start gap-2">
+              <span className="text-green-500">💵</span>
+              <p className="font-medium text-gray-700">Total Price</p>
             </div>
-            <p className="text-xl font-bold text-gray-800">$273</p>
+            <p className="text-xl font-bold text-gray-800">Rp {totalPrice}</p>
           </div>
         </div>
       </div>
 
-      {/* Continue Shopping Button */}
-      <button className="mt-8 bg-primary text-white py-2 px-6 rounded-lg">
-        Pay With Midtrans
+      <button
+        className="bg-primary text-white py-2 px-6 rounded-lg"
+        onClick={handlePayment}
+        disabled={loading}
+      >
+        {loading ? "Processing..." : "Pay Now"}
       </button>
     </div>
   );

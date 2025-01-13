@@ -1,14 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConfirmStep from "./ConfirmCheckout";
 import CompleteStep from "./CompleteCheckout";
 import SummaryStep from "./SummaryCheckout";
+import { useLocation } from "react-router-dom";
+import { useService } from "../../../hooks/useService";
+import { Service } from "../../../models/Service";
+import { useAuth } from "../../../hooks/useAuth";
+import { usePayment } from "../../../hooks/usePayment";
 
 const steps = ["Summary", "Confirm", "Complete"];
 
 const Checkout: React.FC = () => {
+  const location = useLocation();
+  const { serviceId, selectedDate } = location.state || {};
+  const {
+    getServiceDetail,
+    detailService,
+    loading: serviceLoading,
+  } = useService();
+  const { user, getUserData, loading: userLoading } = useAuth();
+
   const [currentStep, setCurrentStep] = useState(0);
+  const [serviceFee, setServiceFee] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const { isPaid, fetchSnapToken, setUserId, result, setServiceId } =
+    usePayment();
+  const [orderId, setOrderId] = useState<string>("");
+
+  const isLoading = serviceLoading || userLoading;
 
   const goToNextStep = () => {
+    if (currentStep === 1 && !isPaid) {
+      alert("Please complete the payment before proceeding.");
+      return;
+    }
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
@@ -20,8 +45,77 @@ const Checkout: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    getServiceDetail(serviceId);
+    getUserData();
+    const generatedOrderId = `ORDER-SKB-${Date.now()}`;
+    setOrderId(generatedOrderId);
+  }, []);
+
+  useEffect(() => {
+    if (detailService?.price) {
+      const price = Number(detailService.price);
+      const calculatedFee = price * 0.01;
+      setServiceFee(calculatedFee);
+      setTotalPrice(price + calculatedFee);
+      if (user) {
+        setUserId(user.id);
+      }
+      setServiceId(serviceId);
+    }
+  }, [detailService]);
+
+  const handlePayment = () => {
+    if (!user?.id) {
+      alert("User ID is missing. Please log in first.");
+      return;
+    }
+    if (!serviceId) {
+      alert("Service ID is missing. Please select a service.");
+      return;
+    }
+
+    if (detailService) {
+      const itemDetails = [
+        {
+          id: `SKB-Service-${detailService.id}`,
+          price: totalPrice - serviceFee,
+          quantity: 1,
+          name: detailService.title || "Unknown Service",
+        },
+        {
+          id: "SKB-Service-Fee",
+          price: serviceFee,
+          quantity: 1,
+          name: "Service Fee",
+        },
+      ];
+
+      const calculatedGrossAmount = itemDetails.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+
+      fetchSnapToken({
+        gross_amount: calculatedGrossAmount,
+        full_name: user.name,
+        email: user.email,
+        order_id: orderId,
+        item_details: itemDetails,
+      });
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="spinner border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto mt-15 md:mt-20">
       <div className="flex justify-between items-center mb-8">
         {steps.map((step, index) => (
           <div key={index} className="flex-1 text-center">
@@ -45,14 +139,36 @@ const Checkout: React.FC = () => {
         ))}
       </div>
 
-      {/* Step Content */}
-      <div className="border rounded-lg p-6 shadow-md bg-white">
-        {currentStep === 0 && <SummaryStep />}
-        {currentStep === 1 && <ConfirmStep />}
-        {currentStep === 2 && <CompleteStep />}
+      <div className="border rounded-lg shadow-md bg-white">
+        {currentStep === 0 && (
+          <SummaryStep
+            selectedDate={selectedDate}
+            totalPrice={totalPrice}
+            fee={serviceFee}
+            detailService={detailService || ({} as Service)}
+          />
+        )}
+        {currentStep === 1 && user && (
+          <ConfirmStep
+            selectedDate={selectedDate}
+            servicePrice={Number(detailService?.price)}
+            totalPrice={totalPrice}
+            fee={serviceFee}
+            user={user}
+            detailService={detailService || ({} as Service)}
+            handlePayment={handlePayment}
+            order_id={orderId}
+          />
+        )}
+        {currentStep === 2 && (
+          <CompleteStep
+            user={user}
+            detailService={detailService || ({} as Service)}
+            result={result}
+          />
+        )}
       </div>
 
-      {/* Navigation Buttons */}
       <div className="mt-6 flex justify-between">
         <button
           disabled={currentStep === 0}
@@ -64,7 +180,12 @@ const Checkout: React.FC = () => {
         {currentStep < steps.length - 1 ? (
           <button
             onClick={goToNextStep}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            disabled={currentStep === 1 && !isPaid}
+            className={`px-4 py-2 ${
+              currentStep === 1 && !isPaid
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            } rounded-md`}
           >
             Next
           </button>

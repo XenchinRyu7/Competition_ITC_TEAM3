@@ -37,7 +37,7 @@ const Card: React.FC = () => {
               src={item.image_url_full} // Ganti dengan properti gambar jika tersedia
               alt={`Image for ${item.title}`}
               className="w-full h-48 object-cover"
-            />
+            />  
             <div className="py-8 px-4">
               <h3 className="font-semibold text-dark mb-3 text-xl hover:text-primary truncate">
                 {item.title}

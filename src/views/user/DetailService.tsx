@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import TextField from "../../components/Forms/TextField/TextField";
 import TextArea from "../../components/Forms/TextArea/TextArea";
@@ -9,18 +9,48 @@ import DatePickerOne from "../../components/Forms/DatePicker/DatePickerOne";
 const DetailService: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { detailService, loading, error, getServiceDetail } = useService();
+  const navigate = useNavigate();
+
 
   const numericId = Number(id);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      const formattedDate = date.toISOString();
+      setSelectedDate(formattedDate);
+      console.log("Selected date:", formattedDate);
+    } else {
+      setSelectedDate(null);
+      console.log("No date selected");
+    }
+  };
+
   useEffect(() => {
     if (id) {
       getServiceDetail(numericId);
     }
-  }, []);
+  }, [id]);
+
+  const handleCheckout = () => {
+    if (selectedDate) {
+      navigate(`/user/checkout`, {
+        state: {
+          serviceId: numericId,
+          selectedDate,
+        },
+      });
+    } else {
+      alert("Please select a date before proceeding to checkout.");
+    }
+  };
 
   if (loading) {
-    <div className="flex items-center justify-center h-screen">
-      <div className="text-black">Loading...</div>
-    </div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-black">Loading...</div>
+      </div>
+    );
   }
 
   if (error) {
@@ -34,14 +64,12 @@ const DetailService: React.FC = () => {
   return (
     <div className="md:flex py-10 bg-gray-100 gap-6 p-6 mt-15">
       <div className="w-full md:w-2/3 max-w-6xl bg-white rounded-lg p-6 md:flex gap-6 border border-gray-200">
-        {/* Image Section */}
         <div className="md:w-1/6">
           <div className="flex items-center mb-4">
             <FaArrowLeft className="mr-2" />
             <h1 className="text-2xl font-bold">Detail</h1>
           </div>
         </div>
-
         <div className="md:w-5/6">
           <img
             src={
@@ -49,7 +77,7 @@ const DetailService: React.FC = () => {
               "https://via.placeholder.com/800x400"
             }
             alt="Service"
-            className="w-full h-auto rounded-lg"
+            className="w-full h-auto max-h-100 object-cover rounded-lg"
           />
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Nama Jasa</h2>
@@ -98,8 +126,11 @@ const DetailService: React.FC = () => {
         <div className="w-full text-primary py-2 flex items-center">
           Book Now
         </div>
-        <DatePickerOne />
-        <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-5">
+        <DatePickerOne onChange={handleDateChange} />
+        <button
+          onClick={handleCheckout}
+          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-5"
+        >
           Checkout
         </button>
       </div>
