@@ -1,78 +1,63 @@
 import React, { useState } from "react";
 
 const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const cards = [
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja2.jpg" },
-    { image: "/img/orang-kerja2.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-    { image: "/img/orang-kerja1.jpg" },
-  ]; // Array berisi objek dengan gambar lokal
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? cards.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === cards.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
+  const images = [
+    {
+      title: "Profil Penyedia Jasa",
+      description:
+        "Melihat informasi lengkap penyedia jasa, termasuk ulasan dari pengguna sebelumnya.",
+      image: "img/kolaborasi.png",
+    },
+    {
+      title: "Sistem Booking",
+      description:
+        "Memudahkan pengguna untuk memesan jasa dengan jadwal yang fleksibel.",
+      image: "img/boking.png",
+    },
+    {
+      title: "Pembayaran Aman",
+      description:
+        "Menyediakan sistem pembayaran yang aman dan transparan untuk semua transaksi.",
+      image: "img/payment.png",
+    },
+  ];
   return (
     <>
-      <div className="bg-slate-200">
-        <div className="max-w-5xl mx-auto text-center px-4 py-10">
-          <h1 className="text-2xl font-bold mb-5">
-            LOREM IPSUM IS A SIMPLY DUMMY TEXT OF THE PRINTING
-          </h1>
-          <div className="relative flex items-center">
-            {/* Tombol Sebelah Kiri */}
-            <button
-              onClick={handlePrev}
-              className="absolute left-0 z-10 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
-            >
-              {"<"}
-            </button>
-
-            {/* Wrapper Kartu */}
-            <div className="flex overflow-hidden w-full px-5">
+      <div className="bg-slate-200 dark:bg-gray-950" data-aos="zoom-out-down">
+        <div className="max-w-5xl mx-auto px-4 py-10">
+          <div className="text-center mb-8 flex items-center flex-col ">
+            <h1 className="text-2xl text-zinc-950 font-bold mb-5 dark:text-white">
+              Fitur
+            </h1>
+            <p className="lg:w-3/4 w-4/5 lg:block dark:text-slate-200 ">
+              Jelajahi berbagai fitur unggulan yang memudahkan Anda dalam
+              menemukan dan memanfaatkan layanan lokal terpercaya.
+            </p>
+          </div>
+          <div className="flex flex-wrap lg:flex-nowrap justify-center gap-4 px-2">
+            {images.map((image, index) => (
               <div
-                className="flex transition-transform duration-500 space-x-4"
-                style={{
-                  transform: `translateX(-${currentIndex * (100 / 3)}%)`, // Geser tiap kartu lebih kecil
-                  width: `${cards.length * (100 / 3)}%`,
-                }}
+                className="w-full sm:w-72 md:w-64 lg:w-72 bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-200"
+                key={index}
               >
-                {cards.map((card, index) => (
-                  <div key={index} className="flex px-8 justify-center">
-                    <div className="w-60 h-80 border border-blue-300 rounded-lg flex items-center justify-center">
-                      <img
-                        src={card.image}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+                <div>
+                  <img
+                    className="lg:w-full lg:h-60 object-cover"
+                    src={image.image}
+                    // alt={image.title}
+                  />
 
-            {/* Tombol Sebelah Kanan */}
-            <button
-              onClick={handleNext}
-              className="absolute right-0 z-10 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
-            >
-              {">"}
-            </button>
+                  <div className="py-8 px-4">
+                    <h3 className="font-semibold text-zinc-950 mb-3 text-xl truncate">
+                      {image.title}
+                    </h3>
+                    <p className="font-normal text-sm text-zinc-800 mb-6">
+                      {image.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

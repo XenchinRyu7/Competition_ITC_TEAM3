@@ -14,7 +14,7 @@ const Card: React.FC = () => {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
-          Website Operational-app
+          Example Service
         </h1>
         <p className="text-gray-600 max-w-xl mx-auto">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum odit

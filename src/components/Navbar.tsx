@@ -43,13 +43,13 @@ const Navbar: React.FC = () => {
           <div className="hidden sm:flex space-x-2">
             {!isAuthenticated ? (
               <>
-                <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
-                  <Link to="/auth/signin" className="text-primary">
-                    Sign-in
+                <button className="bg-blue-900 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
+                  <Link to="/auth/signin">
+                    Sign In
                   </Link>
                 </button>
-                <button className="bg-blue-500 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600">
-                  Sign-up
+                <button className="bg-blue-50 text-blue-900 font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950 hover:text-white">
+                  Sign Up
                 </button>
               </>
             ) : (
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
         )}
         {/* Menu Responsif untuk yang sudah login */}
         {menuOpen && isAuthenticated && (
-          <div className="sm:hidden flex flex-col items-center space-y-4">
+          <div className="sm:hidden flex flex-col items-center space-y-4 overflow-x-hidden">
             <ul className="flex items-center gap-2 2xsm:gap-4">
               <DarkModeSwitcher />
               <DropdownNotification />
