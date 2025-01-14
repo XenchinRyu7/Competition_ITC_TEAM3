@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeSwitcher from "./Header/DarkModeSwitcher";
-import DropdownNotification from "./Header/DropdownNotification";
 import DropdownUser from "./Header/DropdownUser";
 import { useAuth } from "../hooks/useAuth";
 const Navbar: React.FC = () => {
@@ -44,9 +43,7 @@ const Navbar: React.FC = () => {
             {!isAuthenticated ? (
               <>
                 <button className="bg-blue-900 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
-                  <Link to="/auth/signin">
-                    Sign In
-                  </Link>
+                  <Link to="/auth/signin">Sign In</Link>
                 </button>
                 <button className="bg-blue-50 text-blue-900 font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950 hover:text-white">
                   Sign Up
@@ -54,16 +51,8 @@ const Navbar: React.FC = () => {
               </>
             ) : (
               <div className="flex items-center gap-3 2xsm:gap-7">
-                <div className="block">
-                  <button className="bg-transparent font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:text-black">
-                    <Link to="/auth/signin" className="text-primary">
-                      Browse
-                    </Link>
-                  </button>
-                </div>
                 <ul className="flex items-center gap-2 2xsm:gap-4">
                   <DarkModeSwitcher />
-                  <DropdownNotification />
                 </ul>
                 <DropdownUser />
               </div>
@@ -86,7 +75,6 @@ const Navbar: React.FC = () => {
           <div className="sm:hidden flex flex-col items-center space-y-4 overflow-x-hidden">
             <ul className="flex items-center gap-2 2xsm:gap-4">
               <DarkModeSwitcher />
-              <DropdownNotification />
             </ul>
             <DropdownUser />
           </div>

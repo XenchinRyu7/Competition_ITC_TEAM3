@@ -5,7 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 const WhyChoose: React.FC = () => {
   return (
     <>
-      <section className="bg-blue-950 dark:bg-gray-900">
+      <section className="bg-blue-950 dark:bg-gray-950">
         <div className="max-w-6xl mx-auto py-20 items-center flex flex-wrap justify-center">
           <div className="w-full md:w-1/2 p-6" data-aos="zoom-out-right">
             <div className="mt-6">
@@ -49,7 +49,7 @@ const WhyChoose: React.FC = () => {
 
           {/* Right Section */}
           <div
-            className="w-full md:w-1/2 bg-blue-950  dark:bg-gray-900 p-6"
+            className="w-full md:w-1/2 bg-blue-950  dark:bg-gray-950 p-6"
             data-aos="zoom-out-left"
           >
             <div className="mt-6">

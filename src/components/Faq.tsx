@@ -9,8 +9,8 @@ const Faq = () => {
 
   return (
     <>
-      <section className="bg-slate-100 dark:bg-gray-950">
-        <div className="min-h-screen mx-auto max-w-6xl bg-slate-100 flex flex-col md:flex-row items-center justify-center dark:bg-gray-950">
+      <section className="bg-slate-100 dark:bg-gray-900">
+        <div className="min-h-screen mx-auto max-w-6xl bg-slate-100 flex flex-col md:flex-row items-center justify-center dark:bg-gray-900">
           {/* FAQ Section */}
           <div className="w-full md:w-1/2 flex justify-center pt-10" data-aos="fade-right">
             <div className="px-4 flex flex-col justify-center">

@@ -34,10 +34,10 @@ const Carousel: React.FC = () => {
               menemukan dan memanfaatkan layanan lokal terpercaya.
             </p>
           </div>
-          <div className="flex flex-wrap lg:flex-nowrap justify-center gap-4 px-2">
+          <div className="flex flex-wrap lg:flex-nowrap justify-center gap-4 px-2 ">
             {images.map((image, index) => (
               <div
-                className="w-full sm:w-72 md:w-64 lg:w-72 bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-200"
+                className="w-full sm:w-72 md:w-64 lg:w-72 bg-white rounded-xl shadow-lg overflow-hidden dark:bg-boxdark"
                 key={index}
               >
                 <div>
@@ -48,10 +48,10 @@ const Carousel: React.FC = () => {
                   />
 
                   <div className="py-8 px-4">
-                    <h3 className="font-semibold text-zinc-950 mb-3 text-xl truncate">
+                    <h3 className="font-semibold text-zinc-950 mb-3 text-xl truncate dark:text-white">
                       {image.title}
                     </h3>
-                    <p className="font-normal text-sm text-zinc-800 mb-6">
+                    <p className="font-normal text-sm text-zinc-800 mb-6 dark:text-white">
                       {image.description}
                     </p>
                   </div>

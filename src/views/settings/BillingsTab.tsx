@@ -6,17 +6,17 @@ const BillingsTab: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-medium">Billing Information</h2>
+        <h2 className="text-lg font-medium dark:text-white">Billing Information</h2>
         <div>
           <div className="w-full md:w-1/2">
-            <label className="block text-sm font-medium text-gray-500 mt-4">
+            <label className="block text-sm font-medium text-gray-500 mt-4 dark:text-white">
               Bank Name
             </label>
             <SelectBank />
           </div>
         </div>
         <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-500">
+          <label className="block text-sm font-medium text-gray-500 dark:text-white">
             Account Number
           </label>
           <TextField type="number" placeholder="Enter your account number" />

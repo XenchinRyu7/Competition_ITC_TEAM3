@@ -118,8 +118,8 @@ const SignIn: React.FC = () => {
               </Link>
 
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+                Masuk dan temukan berbagai layanan yang siap membantu kebutuhan
+                Anda.
               </p>
             </div>
           </div>

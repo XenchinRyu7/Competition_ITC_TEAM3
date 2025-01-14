@@ -13,10 +13,11 @@ import DetailService from "../views/user/DetailService";
 import Checkout from "../views/user/Checkout/Checkout";
 import Orders from "../views/user/Orders";
 import ListService from "../views/user/ListService";
-import TableCategory from "../views/admin/table/TableCategory";
 import TableService from "../views/admin/table/TableService";
 import TableTransaction from "../views/admin/table/TableTransaction";
 import TableUser from "../views/admin/table/TableUser";
+import TableCategory from "../components/Tables/category/TableCategory";
+import UserService from "../views/user/UserService";
 
 const AppRoutes = () => {
   return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
         <Route path="checkout" element={<Checkout />} />
         <Route path="list-service" element={<ListService />} />
         <Route path="orders" element={<Orders />} />
+        <Route path="service" element={<UserService />} />
         <Route path="profile/:id" element={<UserSettings />} />
       </Route>
 

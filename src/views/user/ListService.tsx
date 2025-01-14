@@ -37,9 +37,9 @@ const ListService: React.FC = () => {
 
   return (
     <>
-      <div className="bg-slate-100 md:mt-2 min-h-screen pt-20 pb-6 px-4 md:px-6">
+      <div className="bg-slate-100 dark:bg-gray-900  min-h-screen pt-28 pb-6 px-4 md:px-6 dark:bg-dark-900">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          <h2 className="text-3xl font-bold mt-4 dark:text-white mb-8 text-center">
             All Service
           </h2>
 
@@ -49,7 +49,7 @@ const ListService: React.FC = () => {
               <input
                 type="text"
                 placeholder="Search services..."
-                className="w-full p-3 rounded-md border border-gray-300"
+                className="w-full p-3 rounded-md border border-gray-300 dark:text-white dark:bg-boxdark"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -68,7 +68,7 @@ const ListService: React.FC = () => {
                   <div
                     key={item.id}
                     onClick={() => handleCardClick(item.id)}
-                    className="bg-white shadow-md rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg"
+                    className="bg-white dark:bg-boxdark-2 shadow-md rounded-lg border border-blue-900 cursor-pointer hover:shadow-lg"
                   >
                     <div className="w-full bg-gray-300 rounded-lg flex justify-center items-center mb-4">
                       <img
@@ -79,11 +79,11 @@ const ListService: React.FC = () => {
                     </div>
                     <div className="m-4">
                       <div className="flex justify-between">
-                        <p className="text-lg font-bold text-gray-800">
+                        <p className="text-lg font-bold text-gray-800 dark:text-white">
                           Rp{item.price || "N/A"}
                         </p>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-800">
+                      <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                         {item.title}
                       </h3>
                       <p className="text-sm text-gray-500 mt-2">

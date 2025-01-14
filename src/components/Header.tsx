@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 export default function Header() {
@@ -42,7 +42,10 @@ export default function Header() {
           Join Now
         </a>
 
-        <div className="flex flex-col mt-6 sm:mt-10 justify-center items-center" data-aos="fade-up">
+        <div
+          className="flex flex-col mt-6 sm:mt-10 justify-center items-center"
+          data-aos="fade-up"
+        >
           <p className="text-sm sm:text-base text-white">
             Trusted by 1000+ companies
           </p>

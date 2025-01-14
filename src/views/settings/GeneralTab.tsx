@@ -43,10 +43,10 @@ const GeneralTab: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-medium">Profile</h2>
+        <h2 className="text-lg font-medium dark:text-white">Profile</h2>
         <div className="flex flex-row gap-6 mt-4">
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-500 mt-4">
+            <label className="block text-sm font-medium text-gray-500 mt-4 dark:text-white">
               Full name
             </label>
             <TextField
@@ -58,7 +58,7 @@ const GeneralTab: React.FC = () => {
             />
           </div>
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-500 mt-4">
+            <label className="block text-sm font-medium text-gray-500 mt-4 dark:text-white">
               Email
             </label>
             <TextField
@@ -70,9 +70,9 @@ const GeneralTab: React.FC = () => {
             />
           </div>
         </div>
-        <div className="flex flex-row gap-6 mt-4">
+        <div className="flex flex-row gap-6 mt-4 dark:text-white">
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-500">
+            <label className="block text-sm font-medium text-gray-500 dark:text-white">
               Number Phone
             </label>
             <TextField
@@ -84,7 +84,7 @@ const GeneralTab: React.FC = () => {
             />
           </div>
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-500">
+            <label className="block text-sm font-medium text-gray-500 dark:text-white">
               Location
             </label>
             <SelectGroupTwo value={formData.address} />
@@ -92,10 +92,10 @@ const GeneralTab: React.FC = () => {
         </div>
       </div>
       <div>
-        <h2 className="text-lg font-medium">Account</h2>
+        <h2 className="text-lg font-medium dark:text-white">Account</h2>
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div>
-            <label className="block text-sm font-medium text-gray-500">
+            <label className="block text-sm font-medium text-gray-500 dark:text-white">
               Email
             </label>
             <TextField
@@ -107,7 +107,7 @@ const GeneralTab: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">
+            <label className="block text-sm font-medium text-gray-500 dark:text-white">
               Password
             </label>
             <TextField
@@ -118,7 +118,7 @@ const GeneralTab: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex justify-end dark:text-white">
         <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">
           Save information
         </button>

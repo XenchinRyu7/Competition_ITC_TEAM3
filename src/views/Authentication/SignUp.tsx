@@ -171,8 +171,8 @@ const SignUp: React.FC = () => {
                 <img className="dark:hidden" src={LogoDark} alt="Logo" />
               </Link>
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+                Bergabunglah dengan SkillBridge dan jadilah bagian dari platform
+                layanan terbaik untuk memenuhi kebutuhan Anda.
               </p>
             </div>
           </div>

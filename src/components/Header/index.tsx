@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import DropdownMessage from "./DropdownMessage";
-import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import LogoIcon from "../../assets/images/logo/logo-icon.png";
 import DarkModeSwitcher from "./DarkModeSwitcher";
@@ -104,7 +102,6 @@ const Header = (props: {
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}
-            <DropdownNotification />
             {/* <!-- Notification Menu Area --> */}
           </ul>
 
