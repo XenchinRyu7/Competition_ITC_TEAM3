@@ -73,7 +73,7 @@ const SignUp: React.FC = () => {
     }
 
     setErrors(tempErrors);
-    return isValid;a
+    return isValid;
   };
 
   const validateTab2 = () => {
