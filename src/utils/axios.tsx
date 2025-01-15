@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://alope.id/skillbridge.php/api/",
+  baseURL: "https://alope.id/skillbridge.php/api/service",
   headers: {
     "Content-Type": "application/json",
   },

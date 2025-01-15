@@ -34,7 +34,7 @@ interface SuccessResponse {
 
 type ApiResponse = SuccessResponse | ErrorResponse;
 
-export const createService = async (data: FormData): Promise<string> => {
+export const ScreateService = async (data: FormData): Promise<string> => {
   try {
     const response = await axiosInstance.post<ApiResponse>(
       "/users/services",

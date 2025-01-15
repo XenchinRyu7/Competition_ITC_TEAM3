@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     <>
       <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-md fixed backdrop-blur ">
         <div className="flex items-center justify-between lg:px-10">
-          <div className="text-white font-bold text-xl sm:text-2xl">
+          <div className="text-gray-800 dark:text-white font-bold text-xl sm:text-2xl">
             SkilBridge
           </div>
           <div className="sm:hidden">
