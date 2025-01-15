@@ -16,8 +16,9 @@ import ListService from "../views/user/ListService";
 import TableService from "../views/admin/table/TableService";
 import TableTransaction from "../views/admin/table/TableTransaction";
 import TableUser from "../views/admin/table/TableUser";
-import TableCategory from "../components/Tables/category/TableCategory";
 import UserService from "../views/user/UserService";
+import TableCategory from "../components/Tables/category/TableCategory";
+import UpdateService from "../views/user/UpdateService";
 
 const AppRoutes = () => {
   return (
@@ -31,10 +32,12 @@ const AppRoutes = () => {
 
       <Route path="/user" element={<UserRoute />}>
         <Route path="post-service" element={<PostService />} />
+        <Route path="edit-service/:id" element={<UpdateService />} />
         <Route path="user-settings" element={<UserSettings />} />
         <Route path="detail/:id" element={<DetailService />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="list-service" element={<ListService />} />
+        <Route path="service" element={<UserService />} />
         <Route path="orders" element={<Orders />} />
         <Route path="service" element={<UserService />} />
         <Route path="profile/:id" element={<UserSettings />} />

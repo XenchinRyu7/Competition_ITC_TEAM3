@@ -85,7 +85,6 @@ const RowUsers = () => {
           </thead>
           <tbody>
             {users
-              .filter((user) => user.role === "user")
               .map((user, index) => (
                 <tr
                   key={index}

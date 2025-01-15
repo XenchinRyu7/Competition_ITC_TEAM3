@@ -1,14 +1,4 @@
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 export default function Header() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1200, // Animation duration in milliseconds
-      once: true, // Whether animation should happen only once
-    });
-  }, []);
-
   return (
     <section
       className="relative bg-cover bg-blue-950 bg-center bg-no-repeat dark:bg-gray-900"
@@ -42,10 +32,7 @@ export default function Header() {
           Join Now
         </a>
 
-        <div
-          className="flex flex-col mt-6 sm:mt-10 justify-center items-center"
-          data-aos="fade-up"
-        >
+        <div className="flex flex-col mt-6 sm:mt-10 justify-center items-center">
           <p className="text-sm sm:text-base text-white">
             Trusted by 1000+ companies
           </p>

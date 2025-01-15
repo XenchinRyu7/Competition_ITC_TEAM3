@@ -86,7 +86,7 @@ const ListService: React.FC = () => {
                       <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-gray-500 mt-2">
+                      <p className="text-sm text-gray-800 mt-2 dark:text-white">
                         {item.description || "No description available."}
                       </p>
                     </div>

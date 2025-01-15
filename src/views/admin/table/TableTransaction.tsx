@@ -1,5 +1,5 @@
 import Breadcrumb from "../../../components/Breadcrumbs/Breadcrumb";
-import TableOne from "../../../components/Tables/category/TableCategory";
+import TableTransactions from "../../../components/Tables/transaction/TableTransactions";
 
 const TableTransaction = () => {
   return (
@@ -7,7 +7,7 @@ const TableTransaction = () => {
       <Breadcrumb pageName="Table transaction" />
 
       <div className="flex flex-col gap-10">
-        <TableOne />
+        <TableTransactions />
       </div>
     </>
   );

@@ -40,6 +40,9 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="hidden sm:flex space-x-2">
+            <button className=" text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:text-blue-500">
+              <Link to="/user/list-service">Browse</Link>
+            </button>
             {!isAuthenticated ? (
               <>
                 <button className="bg-blue-900 text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
@@ -59,7 +62,6 @@ const Navbar: React.FC = () => {
             )}
           </div>
         </div>
-        {/* Menu Responsif */}
         {menuOpen && !isAuthenticated && (
           <div className="sm:hidden flex flex-col items-center space-y-4">
             <button className="bg-blue-900 text-white font-medium px-8 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950">
@@ -70,7 +72,6 @@ const Navbar: React.FC = () => {
             </button>
           </div>
         )}
-        {/* Menu Responsif untuk yang sudah login */}
         {menuOpen && isAuthenticated && (
           <div className="sm:hidden flex flex-col items-center space-y-4 overflow-x-hidden">
             <ul className="flex items-center gap-2 2xsm:gap-4">

@@ -7,6 +7,8 @@ import { useService } from "../../../hooks/useService";
 import { Service } from "../../../models/Service";
 import { useAuth } from "../../../hooks/useAuth";
 import { usePayment } from "../../../hooks/usePayment";
+import { TransactionResult } from "../../../services/paymentService";
+import { User } from "../../../models/user";
 
 const steps = ["Summary", "Confirm", "Complete"];
 
@@ -116,7 +118,7 @@ const Checkout: React.FC = () => {
 
   return (
     <>
-     <div className="p-6 max-w-4xl mx-auto md:mt-20 dark:bg-gray-800">
+      <div className="p-6 mx-auto md:pt-25 dark:bg-gray-800">
         <div className="flex justify-between items-center mb-8">
           {steps.map((step, index) => (
             <div key={index} className="flex-1 text-center">
@@ -163,9 +165,12 @@ const Checkout: React.FC = () => {
           )}
           {currentStep === 2 && (
             <CompleteStep
-              user={user}
+              user={user || ({} as User)}
               detailService={detailService || ({} as Service)}
-              result={result}
+              result={result || ({} as TransactionResult)}
+              selectedDate={selectedDate}
+              order_id={orderId}
+              totalPrice={totalPrice}
             />
           )}
         </div>
@@ -196,7 +201,7 @@ const Checkout: React.FC = () => {
             </button>
           )}
         </div>
-      </div> 
+      </div>
     </>
   );
 };

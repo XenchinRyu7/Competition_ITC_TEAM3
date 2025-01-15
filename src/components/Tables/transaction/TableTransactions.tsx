@@ -1,40 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { Drawer } from "flowbite";
-import RowUsers from "./RowUsers";
-import { useUser } from "../../../hooks/useUser";
+import RowTransaction from "./RowTransaction";
 
-const TableUsers: React.FC = () => {
-  const createModalRef = useRef<HTMLDivElement | null>(null);
-  const [drawerInstance, setDrawerInstance] = useState<Drawer | null>(null);
-
-  const { users, fetchUsers } = useUser();
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
-    if (createModalRef.current) {
-      const instance = new Drawer(createModalRef.current);
-      setDrawerInstance(instance);
-    }
-  }, []);
-
+const TableTransactions: React.FC = () => {
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900 antialiased">
         <div className="mx-auto max-w-screen-2xl">
           <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-              <div className="flex-1 flex items-center space-x-2">
-                <h5>
-                  <span className="text-gray-500">All Users:</span>
-                  <span className="dark:text-white">
-                    {users.filter((user) => user.role === "user").length}
-                  </span>
-                </h5>
-              </div>
+              <div className="flex-1 flex items-center space-x-2"></div>
             </div>
             <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
               <div className="w-full md:w-1/2">
@@ -56,7 +31,7 @@ const TableUsers: React.FC = () => {
                 </form>
               </div>
             </div>
-            <RowUsers />
+            <RowTransaction />
           </div>
         </div>
       </section>
@@ -64,4 +39,4 @@ const TableUsers: React.FC = () => {
   );
 };
 
-export default TableUsers;
+export default TableTransactions;

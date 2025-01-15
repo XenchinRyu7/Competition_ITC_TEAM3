@@ -1,32 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa";
 import TextField from "../../components/Forms/TextField/TextField";
 import TextArea from "../../components/Forms/TextArea/TextArea";
 import { useServiceContext } from "../../context/ServiceContext";
 import SelectCategory from "../../components/Forms/SelectGroup/SelectCategory";
-import { useNotification } from "../../hooks/useNotification";
-import { useNavigate } from "react-router-dom";
+import { useNotificationContext } from "../../context/NotificationContext";
 
-const PostService: React.FC = () => {
-  const { createNewService, success, error, getAllServiceByUser, loading } =
-    useServiceContext();
-  const { showAlert } = useNotification();
+const UpdateService: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const { showAlert } = useNotificationContext();
   const navigate = useNavigate();
+  const {
+    detailService,
+    getServiceDetail,
+    updateExistingService,
+    updateServiceImage,
+  } = useServiceContext();
 
   const [serviceName, setServiceName] = useState("");
   const [servicePrice, setServicePrice] = useState("");
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState<number | null>(null);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<(string | File)[]>([]);
   const maxFiles = 1;
+
+  useEffect(() => {
+    if (id) {
+      getServiceDetail(Number(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (detailService) {
+      setServiceName(detailService.title);
+      setServicePrice(detailService?.price);
+      setDescription(detailService.description);
+      setCategoryId(detailService?.category.id);
+
+      if (detailService.image_url_full) {
+        setUploadedFiles([detailService.image_url_full]);
+      }
+    }
+  }, [detailService]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const filesArray = Array.from(event.target.files);
-      setUploadedFiles((prevFiles) =>
-        [...prevFiles, ...filesArray].slice(0, maxFiles)
-      );
+      setUploadedFiles(filesArray.slice(0, maxFiles));
     }
   };
 
@@ -36,58 +58,40 @@ const PostService: React.FC = () => {
       return;
     }
 
-    if (!serviceName.trim() || !servicePrice.trim() || !description.trim()) {
-      showAlert("All fields must be filled out.", "warning");
-      return;
-    }
-
-    if (uploadedFiles.length === 0) {
-      showAlert("Please upload at least one image.", "warning");
-      return;
-    }
-
     try {
-      const formData = new FormData();
-      formData.append("title", serviceName);
-      formData.append("price", servicePrice);
-      formData.append("description", description);
-      formData.append("category_id", categoryId.toString());
-      uploadedFiles.forEach((file) => formData.append("image_url", file));
-
-      console.log("Submitting new service with the following data:", {
+      console.log("Updating service with the following details:", {
+        id: Number(id),
         title: serviceName,
         price: servicePrice,
         description,
-        categoryId,
-        uploadedFiles,
+        category_id: categoryId,
       });
 
-      await createNewService(formData);
+      await updateExistingService({
+        id: Number(id),
+        title: serviceName,
+        price: servicePrice,
+        description,
+        category_id: categoryId,
+      });
 
-      const waitForLoading = () =>
-        new Promise<void>((resolve) => {
-          const interval = setInterval(() => {
-            if (!loading) {
-              clearInterval(interval);
-              resolve();
-            }
-          }, 100);
+      if (uploadedFiles.length > 0 && typeof uploadedFiles[0] !== "string") {
+        const formData = new FormData();
+        uploadedFiles.forEach((file) => {
+          if (typeof file !== "string") {
+            formData.append("image_url", file);
+          }
         });
-      await waitForLoading();
+        await updateServiceImage(Number(id), formData);
 
-      if (success) {
-        showAlert(success, "success");
-        navigate("/user/service");
-        getAllServiceByUser();
-      } else {
-        throw new Error("Service creation did not complete successfully.");
+        const newImageUrl = URL.createObjectURL(uploadedFiles[0] as File);
+        setUploadedFiles([newImageUrl]);
       }
-    } catch (err) {
-      const errorMessage =
-        error ||
-        (err instanceof Error ? err.message : "An unexpected error occurred.");
-      showAlert(errorMessage, "error");
-      console.error("Error creating service:", err);
+
+      navigate("/user/service");
+    } catch (error) {
+      showAlert("Failed to update service.", "error");
+      console.error(error);
     }
   };
 
@@ -95,7 +99,7 @@ const PostService: React.FC = () => {
     <div className="p-6 max-w-4xl mx-auto mt-20">
       <div className="flex items-center mb-4">
         <FaArrowLeft className="mr-2" />
-        <h1 className="text-xl font-bold">Post Service</h1>
+        <h1 className="text-xl font-bold">Update Service</h1>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 shadow rounded-lg p-4">
@@ -118,7 +122,7 @@ const PostService: React.FC = () => {
             id="file-upload"
             type="file"
             multiple
-            accept=".jpg,.png,.mp4"
+            accept=".jpg,.png"
             className="hidden"
             onChange={handleFileChange}
           />
@@ -166,9 +170,8 @@ const PostService: React.FC = () => {
               value={categoryId ?? 0}
               onChange={(e) => {
                 const numericValue = Number(e.target.value);
-                console.log("Selected Category ID (before set):", numericValue);
+                console.log("Category ID selected in parent:", numericValue);
                 setCategoryId(numericValue);
-                console.log("Category ID state (after set):", numericValue);
               }}
             />
           </div>
@@ -185,11 +188,20 @@ const PostService: React.FC = () => {
               key={index}
               className="w-full aspect-square bg-gray-100 flex items-center justify-center rounded-lg"
             >
-              <img
-                src={URL.createObjectURL(file)}
-                alt="image uploaded"
-                className="object-cover w-full h-full rounded-lg"
-              />
+              {typeof file === "string" ? (
+                <img
+                  src={file}
+                  alt="Previous uploaded"
+                  className="object-cover w-full h-full rounded-lg"
+                />
+              ) : (
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt="Uploaded file"
+                  className="object-cover w-full h-full rounded-lg"
+                  onLoad={() => URL.revokeObjectURL(URL.createObjectURL(file))}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -207,4 +219,4 @@ const PostService: React.FC = () => {
   );
 };
 
-export default PostService;
+export default UpdateService;
