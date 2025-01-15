@@ -14,6 +14,7 @@ export interface Service {
 }
 
 export interface User {
+  id: number;
   name: string;
   address: string;
   phone_number: string;

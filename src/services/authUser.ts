@@ -1,4 +1,3 @@
-// src/services/authService.ts
 import { User } from "../models/user";
 import axiosInstance from "../utils/axios";
 
@@ -17,8 +16,10 @@ export const registerUser = async (data: {
   password: string;
   phone_number: string;
   address: string;
+  profile_photo: string;
 }): Promise<AuthResponse> => {
   const response = await axiosInstance.post<AuthResponse>("/users", data);
+  console.log(response);
   return response.data;
 };
 
@@ -30,7 +31,6 @@ export const loginUser = async (data: {
   return response.data;
 };
 
-// src/services/user.ts
 export const getUser = async (): Promise<User> => {
   const response = await axiosInstance.get<{ data: User }>("/users/current");
   return response.data.data;

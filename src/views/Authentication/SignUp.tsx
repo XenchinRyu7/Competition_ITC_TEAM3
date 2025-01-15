@@ -4,14 +4,15 @@ import LogoDark from "../../assets/images/logo/logo-dark.png";
 import Logo from "../../assets/images/logo/logo-icon.png";
 import TextField from "../../components/Forms/TextField/TextField";
 import { useAuth } from "../../hooks/useAuth";
-import SuccessAlerts from "../../components/Alerts/SuccessAlerts";
-import ErrorAlerts from "../../components/Alerts/FailedAlerts";
-import WarningAlerts from "../../components/Alerts/WarningAlerts";
 import SelectLocation from "../../components/Forms/SelectGroup/SelectLocation";
 import { LuLockKeyhole } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6";
+import SuccessAlerts from "../../components/Alerts/SuccessAlerts";
+import WarningAlerts from "../../components/Alerts/WarningAlerts";
+import FailedAlerts from "../../components/Alerts/FailedAlerts";
+import { useNavigate } from "react-router-dom";
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const SignUp: React.FC = () => {
     confirmPassword: "",
     phoneNumber: "",
     address: "",
-    role: "user",
+    profile_photo: "",
   });
 
   const [errors, setErrors] = useState({
@@ -31,10 +32,12 @@ const SignUp: React.FC = () => {
     confirmPassword: "",
     phoneNumber: "",
     address: "",
+    profile_photo: "",
   });
 
   const [currentTab, setCurrentTab] = useState(1);
   const { register, loading, error, success } = useAuth();
+  const navigate = useNavigate();
 
   const validateTab1 = () => {
     const tempErrors = { ...errors };
@@ -70,7 +73,7 @@ const SignUp: React.FC = () => {
     }
 
     setErrors(tempErrors);
-    return isValid;
+    return isValid;a
   };
 
   const validateTab2 = () => {
@@ -135,19 +138,25 @@ const SignUp: React.FC = () => {
         password: formData.password,
         phone_number: formData.phoneNumber,
         address: formData.address,
-        role: formData.role,
+        profile_photo: "",
       });
-
+      console.log("Form Data:", formData);
       if (loading) {
         showAlert("Registering, please wait...", "warning");
       } else if (success) {
         showAlert(success, "success");
+        navigate("/auth/signin");
       } else if (error) {
         showAlert(error, "error");
-      } else {
-        showAlert("An unknown error occurred.", "error");
       }
     }
+  };
+
+  const handleLocationChange = (location: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      address: location,
+    }));
   };
 
   return (
@@ -156,7 +165,7 @@ const SignUp: React.FC = () => {
         <SuccessAlerts tittle="Success" message={alertMessage} />
       )}
       {alertType === "error" && alertMessage && (
-        <ErrorAlerts tittle="Error" message={alertMessage} />
+        <FailedAlerts tittle="Error" message={alertMessage} />
       )}
       {alertType === "warning" && alertMessage && (
         <WarningAlerts tittle="Warning" message={alertMessage} />
@@ -170,10 +179,7 @@ const SignUp: React.FC = () => {
                 <img className="hidden dark:block" src={Logo} alt="Logo" />
                 <img className="dark:hidden" src={LogoDark} alt="Logo" />
               </Link>
-              <p className="2xl:px-20">
-                Bergabunglah dengan SkillBridge dan jadilah bagian dari platform
-                layanan terbaik untuk memenuhi kebutuhan Anda.
-              </p>
+              <p className="2xl:px-20">Register for use SkillBridge</p>
             </div>
           </div>
 
@@ -293,7 +299,7 @@ const SignUp: React.FC = () => {
                       </label>
                       <div className="relative">
                         <TextField
-                          type="text"
+                          type="number"
                           placeholder="Enter your phone number"
                           name="phoneNumber"
                           value={formData.phoneNumber}
@@ -311,7 +317,7 @@ const SignUp: React.FC = () => {
                     </div>
 
                     <div className="mb-4">
-                      <SelectLocation />
+                      <SelectLocation onLocationChange={handleLocationChange} />
                       {errors.address && (
                         <span className="text-red-500">{errors.address}</span>
                       )}

@@ -34,7 +34,7 @@ export const useAuth = () => {
     password: string;
     phone_number: string;
     address: string;
-    role: string;
+    profile_photo: string;
   }) => {
     setLoading(true);
     setError(null);
