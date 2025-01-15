@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { Drawer } from "flowbite";
-import CreateModal from "../../modal/CreateModal";
 import RowServices from "./RowServies";
 import { useService } from "../../../hooks/useService";
 
@@ -26,13 +25,6 @@ const TableServices: React.FC = () => {
     if (createModalRef.current) {
       createModalRef.current.classList.remove("hidden");
       drawerInstance?.show();
-    }
-  };
-
-  const closeModal = () => {
-    if (drawerInstance && createModalRef.current) {
-      drawerInstance.hide();
-      createModalRef.current.classList.add("hidden");
     }
   };
 
@@ -83,16 +75,6 @@ const TableServices: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <div
-        ref={createModalRef}
-        id="create-modal"
-        className="fixed top-0 left-0 z-50 h-full w-full bg-black bg-opacity-50 hidden"
-        tabIndex={-1}
-        aria-labelledby="preview-modal-label"
-      >
-        <CreateModal onClose={closeModal} />
-      </div>
     </>
   );
 };

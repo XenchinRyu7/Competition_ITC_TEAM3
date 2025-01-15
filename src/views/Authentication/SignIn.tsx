@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
     password: "",
   });
 
-  const { login, loading, error, success, isAuthenticated, getRole, getToken } =
+  const { login, loading, error, success, isAuthenticated, getRole } =
     useAuth();
 
   const validate = () => {

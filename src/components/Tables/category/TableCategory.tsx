@@ -8,7 +8,7 @@ import { useCategory } from "../../../hooks/useCategory";
 const TableCategory: React.FC = () => {
   const [onUpdate, setUpdateSignal] = useState(0);
 
-  const handleCategoryAdded = (newCategory: string) => {
+  const handleCategoryAdded = () => {
     setUpdateSignal((prevSignal) => prevSignal + 1);
   };
 

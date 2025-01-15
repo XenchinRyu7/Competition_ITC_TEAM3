@@ -1,5 +1,3 @@
-import React from "react";
-
 const Content = () => {
   return (
     <>
@@ -24,7 +22,10 @@ const Content = () => {
           </div>
         </div>
 
-        <div className="space-y-6 w-full md:w-1/2 px-4 md:px-0" data-aos="fade-left">
+        <div
+          className="space-y-6 w-full md:w-1/2 px-4 md:px-0"
+          data-aos="fade-left"
+        >
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center md:text-left  dark:text-slate-200">
             SkillBridge
           </h2>

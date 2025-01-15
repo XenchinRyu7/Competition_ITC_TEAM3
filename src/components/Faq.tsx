@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Faq = () => {
   const [selected, setSelected] = useState<number | null>(null);
@@ -12,7 +12,10 @@ const Faq = () => {
       <section className="bg-slate-100 dark:bg-gray-900">
         <div className="min-h-screen mx-auto max-w-6xl bg-slate-100 flex flex-col md:flex-row items-center justify-center dark:bg-gray-900">
           {/* FAQ Section */}
-          <div className="w-full md:w-1/2 flex justify-center pt-10" data-aos="fade-right">
+          <div
+            className="w-full md:w-1/2 flex justify-center pt-10"
+            data-aos="fade-right"
+          >
             <div className="px-4 flex flex-col justify-center">
               <h2 className="font-semibold text-zinc-950 text-3xl mb-10 text-center md:text-left dark:text-slate-200">
                 Frequently Asked Questions
@@ -90,7 +93,10 @@ const Faq = () => {
           </div>
 
           {/* Image Section */}
-          <div className="hidden md:flex w-1/2 justify-center mt-10 md:mt-0" data-aos="fade-left">
+          <div
+            className="hidden md:flex w-1/2 justify-center mt-10 md:mt-0"
+            data-aos="fade-left"
+          >
             <div className="relative z-10 mt-10">
               {/* Front Box */}
               <div className="w-64 h-80 mt-40 bg-white rounded-lg relative">

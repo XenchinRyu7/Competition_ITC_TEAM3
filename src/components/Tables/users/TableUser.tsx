@@ -1,24 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Drawer } from "flowbite";
 import RowUsers from "./RowUsers";
 import { useUser } from "../../../hooks/useUser";
 
 const TableUsers: React.FC = () => {
-  const createModalRef = useRef<HTMLDivElement | null>(null);
-  const [drawerInstance, setDrawerInstance] = useState<Drawer | null>(null);
-
   const { users, fetchUsers } = useUser();
 
   useEffect(() => {
     fetchUsers();
-  }, []);
-
-  useEffect(() => {
-    if (createModalRef.current) {
-      const instance = new Drawer(createModalRef.current);
-      setDrawerInstance(instance);
-    }
   }, []);
 
   return (

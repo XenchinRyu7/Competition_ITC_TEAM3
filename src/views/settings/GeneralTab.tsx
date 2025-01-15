@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SelectGroupTwo from "../../components/Forms/SelectGroup/SelectCountry";
 import TextField from "../../components/Forms/TextField/TextField";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -82,12 +81,6 @@ const GeneralTab: React.FC = () => {
               onChange={handleInputChange}
               placeholder="Enter your phone number"
             />
-          </div>
-          <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-500 dark:text-white">
-              Location
-            </label>
-            <SelectGroupTwo value={formData.address} />
           </div>
         </div>
       </div>

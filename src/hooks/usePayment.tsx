@@ -33,7 +33,6 @@ import {
   PaymentData,
   SnapTokenResponse,
   TransactionResult,
-  PaymentResult,
 } from "../services/paymentService";
 
 interface ApiError {

@@ -5,7 +5,6 @@ import TextField from "../../components/Forms/TextField/TextField";
 import TextArea from "../../components/Forms/TextArea/TextArea";
 import { useService } from "../../hooks/useService";
 import DatePickerOne from "../../components/Forms/DatePicker/DatePickerOne";
-import Footer from "../../components/Footer";
 
 const DetailService: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -11,6 +11,7 @@ export interface Service {
   title: string;
   phone_number: string;
   image_url_full: string;
+  price: string;
 }
 
 export interface Order {

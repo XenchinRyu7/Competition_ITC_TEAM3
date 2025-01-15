@@ -9,7 +9,7 @@ interface RowCategoryProps {
   onUpdate: number;
 }
 
-const RowCategory: React.FC<RowCategoryProps> = ({ onUpdate }) => {
+const RowCategory: React.FC<RowCategoryProps> = () => {
   const editModalRef = useRef<HTMLDivElement | null>(null);
   const deleteModalRef = useRef<HTMLDivElement | null>(null);
   const [drawerInstance, setDrawerInstance] = useState<Drawer | null>(null);

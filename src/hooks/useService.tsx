@@ -63,12 +63,12 @@ export const useService = () => {
     }
   };
 
-  const createNewService = async (data: Partial<Service>) => {
+  const createNewService = async (data: FormData) => {
     setLoading(true);
     setError(null);
     try {
       const response = await createService(data);
-      if (response?.data) {
+      if (response) {
         setSuccess("Service created successfully.");
         getAllService();
       }
@@ -80,12 +80,12 @@ export const useService = () => {
     }
   };
 
-  const updateExistingService = async (id: number, data: Partial<Service>) => {
+  const updateExistingService = async (data: Partial<Service>) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await updateService(id, data);
-      if (response?.data) {
+      const response = await updateService(data);
+      if (response) {
         setSuccess("Service updated successfully.");
         getAllService(); // Refresh list after update
       }
@@ -101,7 +101,7 @@ export const useService = () => {
     setLoading(true);
     setError(null);
     try {
-      await deleteService(id);
+      await deleteService({ id });
       setSuccess("Service deleted successfully.");
       getAllService(); // Refresh list after deletion
     } catch (err) {

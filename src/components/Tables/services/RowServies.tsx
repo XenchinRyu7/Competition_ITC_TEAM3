@@ -2,9 +2,7 @@ import { useService } from "../../../hooks/useService";
 import { useEffect, useRef, useState } from "react";
 import { Drawer } from "flowbite";
 import { FaTrash, FaEdit, FaEye } from "react-icons/fa";
-import EditModal from "../../modal/EditModal";
 import PreviewDrawer from "../../modal/PreviewDrawer";
-import DeleteModal from "../../modal/DeleteModal";
 
 const RowServices = () => {
   const editModalRef = useRef<HTMLDivElement | null>(null);
@@ -154,25 +152,6 @@ const RowServices = () => {
             ))}
           </tbody>
         </table>
-      </div>
-      <div
-        ref={editModalRef}
-        id="drawer-update-product"
-        className="fixed top-0 left-0 z-50 h-full w-full bg-black bg-opacity-50 hidden"
-        tabIndex={-1}
-        aria-labelledby="drawer-update-product-label"
-      >
-        <EditModal onClose={closeModal} />
-      </div>
-
-      <div
-        ref={deleteModalRef}
-        id="delete-modal"
-        className="fixed top-0 left-0 z-50 h-full w-full bg-black bg-opacity-50 hidden"
-        tabIndex={-1}
-        aria-labelledby="delete-modal-label"
-      >
-        <DeleteModal onClose={closeModal} />
       </div>
       <div
         ref={previewModalRef}
