@@ -347,6 +347,10 @@ const SignUp: React.FC = () => {
                   Have any account?{" "}
                   <Link to="/auth/signin" className="text-primary">
                     Sign In
+                  </Link>{" "}
+                  Or{" "}
+                  <Link to="/" className="text-primary">
+                    Back
                   </Link>
                 </p>
               </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ConfirmStep from "./ConfirmCheckout";
 import CompleteStep from "./CompleteCheckout";
 import SummaryStep from "./SummaryCheckout";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useService } from "../../../hooks/useService";
 import { Service } from "../../../models/Service";
 import { useAuth } from "../../../hooks/useAuth";
@@ -214,7 +214,7 @@ const Checkout: React.FC = () => {
           </button>
         ) : (
           <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-            Finish
+            <Link to="/user/orders">Finish</Link>
           </button>
         )}
       </div>

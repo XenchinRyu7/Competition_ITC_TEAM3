@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                   <Link to="/auth/signin">Sign In</Link>
                 </button>
                 <button className="bg-blue-50 text-blue-900 font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-950 hover:text-white">
-                  Sign Up
+                  <Link to="/auth/signup">Sign Up</Link>
                 </button>
               </>
             ) : (
@@ -79,6 +79,9 @@ const Navbar: React.FC = () => {
               <DarkModeSwitcher />
             </ul>
             <DropdownUser />
+            <button className=" text-gray-900 dark:text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:text-blue-500">
+              <Link to="/user/list-service">Browse</Link>
+            </button>
           </div>
         )}
       </header>

@@ -186,12 +186,16 @@ const SignIn: React.FC = () => {
                 </div>
 
                 <div className="mt-6 text-center">
-                  <p>
+                    <p>
                     Don’t have any account?{" "}
                     <Link to="/auth/signup" className="text-primary">
                       Sign Up
+                    </Link>{" "}
+                    Or{" "}
+                    <Link to="/" className="text-primary">
+                      Back
                     </Link>
-                  </p>
+                    </p>
                 </div>
               </form>
             </div>
