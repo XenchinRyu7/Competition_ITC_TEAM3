@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DarkModeSwitcher from "./Header/DarkModeSwitcher";
 import DropdownUser from "./Header/DropdownUser";
 import { useAuth } from "../hooks/useAuth";
+
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,8 +12,8 @@ const Navbar: React.FC = () => {
     <>
       <header className="top-0 left-0 w-full z-50 py-4 px-6 sm:px-8 shadow-md fixed backdrop-blur ">
         <div className="flex items-center justify-between lg:px-10">
-          <div className="text-gray-800 dark:text-white font-bold text-xl sm:text-2xl">
-            SkilBridge
+          <div className="text-gray-800 dark:text-white font-bold text-xl sm:text-2xl cursor-pointer">
+            <Link to="/">SkilBridge</Link>
           </div>
           <div className="sm:hidden">
             <button
@@ -40,7 +41,7 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="hidden sm:flex space-x-2">
-            <button className=" text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:text-blue-500">
+            <button className=" text-gray-900 dark:text-white font-medium px-4 py-2 rounded-full text-sm sm:text-base hover:text-blue-500">
               <Link to="/user/list-service">Browse</Link>
             </button>
             {!isAuthenticated ? (
@@ -73,7 +74,7 @@ const Navbar: React.FC = () => {
           </div>
         )}
         {menuOpen && isAuthenticated && (
-          <div className="sm:hidden flex flex-col items-center space-y-4 overflow-x-hidden">
+          <div className="sm:hidden flex flex-col items-center space-y-4 ">
             <ul className="flex items-center gap-2 2xsm:gap-4">
               <DarkModeSwitcher />
             </ul>

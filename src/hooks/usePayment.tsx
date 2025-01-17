@@ -33,6 +33,7 @@ import {
   PaymentData,
   SnapTokenResponse,
   TransactionResult,
+  PaymentResult
 } from "../services/paymentService";
 
 interface ApiError {
@@ -52,7 +53,7 @@ export const usePayment = () => {
   const [user_id, setUserId] = useState<number>(0);
   const [serviceId, setServiceId] = useState<number>(0);
   const [result, setResult] = useState<TransactionResult | null>(null);
-  const [payment_id, setPaymentId] = useState<number>(0);
+  const [order_date, setOrderDate] = useState<string>("");
 
   const fetchSnapToken = async (paymentData: PaymentData) => {
     setLoading(true);
@@ -70,19 +71,21 @@ export const usePayment = () => {
           const transactionResult: TransactionResult = {
             user_id: user_id,
             order_id: result.order_id,
-            status_code: result.status_code,
             transaction_status: result.transaction_status,
             payment_type: result.payment_type,
             gross_amount: result.gross_amount,
             transaction_time: result.transaction_time,
             fraud_status: result.fraud_status,
             service_id: serviceId,
-            va_numbers: Array.isArray(result.va_numbers)
-              ? result.va_numbers.map((va) => ({
-                  bank: va.bank,
-                  va_number: va.va_number,
-                }))
-              : [],
+            order_date: order_date,
+            va_bank:
+              Array.isArray(result.va_numbers) && result.va_numbers.length > 0
+                ? result.va_numbers[0].bank
+                : null,
+            va_number:
+              Array.isArray(result.va_numbers) && result.va_numbers.length > 0
+                ? result.va_numbers[0].va_number
+                : null,
           };
           setResult(transactionResult);
           processTransactionResult(transactionResult);
@@ -108,19 +111,24 @@ export const usePayment = () => {
   const processTransactionResult = async (
     transactionResult: TransactionResult
   ) => {
-    if (!result) return;
     setLoading(true);
     setError(null);
     setSuccess(null);
+
     try {
-      if (!transactionResult.order_id || !transactionResult.status_code) {
-        throw new Error("Incomplete transaction data received.");
+      const response: PaymentResult = await sendTransactionResult(
+        transactionResult
+      );
+
+      if (response.success) {
+        setSuccess(response.success.message);
+        console.log("Transaction processed successfully:", response.success);
+      } else {
+        throw new Error("Unexpected response format");
       }
-      const response = await sendTransactionResult(transactionResult);
-      setPaymentId(response.id);
-      setSuccess("Transaction processed successfully");
     } catch (err) {
       const apiError = err as ApiError;
+      console.error("Error processing transaction:", apiError);
       setError(
         apiError.response?.data?.message || "Error processing transaction"
       );
@@ -139,7 +147,7 @@ export const usePayment = () => {
     processTransactionResult,
     isPaid,
     setUserId,
-    payment_id,
     setServiceId,
+    setOrderDate,
   };
 };

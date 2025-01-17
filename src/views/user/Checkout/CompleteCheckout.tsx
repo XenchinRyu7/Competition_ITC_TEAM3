@@ -80,7 +80,7 @@ const CompleteStep: React.FC<CompleteStepProps> = ({
         </div>
         <div className="flex justify-center mt-4">
           <a
-            href={`https://wa.me/${detailService.user}`}
+            href={`https://wa.me/${detailService.user.phone_number}`}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-primary text-white py-2 px-6 rounded-lg"

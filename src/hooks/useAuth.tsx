@@ -19,7 +19,7 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     const token = localStorage.getItem("access_token");
     const role = localStorage.getItem("role");
-    if (token && role) {
+    if (token && token.trim() !== "" && role && role.trim() !== "") {
       return true;
     }
     return false;
@@ -112,5 +112,6 @@ export const useAuth = () => {
     getRole,
     getToken,
     getUserData,
+    setUser
   };
 };

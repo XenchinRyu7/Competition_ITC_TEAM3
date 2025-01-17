@@ -7,12 +7,14 @@ import { useService } from "../../../hooks/useService";
 import { Service } from "../../../models/Service";
 import { useAuth } from "../../../hooks/useAuth";
 import { usePayment } from "../../../hooks/usePayment";
-import { TransactionResult } from "../../../services/paymentService";
 import { User } from "../../../models/user";
+import { useNotificationContext } from "../../../context/NotificationContext";
+import { TransactionResult } from "../../../services/paymentService";
 
 const steps = ["Summary", "Confirm", "Complete"];
 
 const Checkout: React.FC = () => {
+  const { showAlert } = useNotificationContext();
   const location = useLocation();
   const { serviceId, selectedDate } = location.state || {};
   const {
@@ -20,20 +22,28 @@ const Checkout: React.FC = () => {
     detailService,
     loading: serviceLoading,
   } = useService();
-  const { user, getUserData, loading: userLoading } = useAuth();
+  const { user, getUserData, loading: userLoading, setUser } = useAuth();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [serviceFee, setServiceFee] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const { isPaid, fetchSnapToken, setUserId, result, setServiceId } =
-    usePayment();
+  const {
+    isPaid,
+    fetchSnapToken,
+    setUserId,
+    result,
+    setServiceId,
+    error,
+    success,
+    setOrderDate,
+  } = usePayment();
   const [orderId, setOrderId] = useState<string>("");
 
   const isLoading = serviceLoading || userLoading;
 
   const goToNextStep = () => {
     if (currentStep === 1 && !isPaid) {
-      alert("Please complete the payment before proceeding.");
+      showAlert("Please complete the payment before proceeding.", "warning");
       return;
     }
     if (currentStep < steps.length - 1) {
@@ -55,25 +65,33 @@ const Checkout: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (detailService?.price) {
-      const price = Number(detailService.price);
-      const calculatedFee = price * 0.01;
-      setServiceFee(calculatedFee);
-      setTotalPrice(price + calculatedFee);
-      if (user) {
-        setUserId(user.id);
-      }
-      setServiceId(serviceId);
+    setUser(user);
+    const price = Number(detailService?.price);
+    const calculatedFee = price * 0.01;
+    setServiceFee(calculatedFee);
+    setTotalPrice(price + calculatedFee);
+    if (user) {
+      setUserId(user.id);
     }
-  }, [detailService]);
+    setServiceId(serviceId);
+    setOrderDate(new Date(selectedDate).toLocaleDateString("id-ID"));
+
+    if (error) {
+      showAlert(error, "error");
+    }
+
+    if (success) {
+      showAlert(success, "success");
+    }
+  }, [detailService, error, success]);
 
   const handlePayment = () => {
     if (!user?.id) {
-      alert("User ID is missing. Please log in first.");
+      showAlert("User ID is missing. Please log in first.", "error");
       return;
     }
     if (!serviceId) {
-      alert("Service ID is missing. Please select a service.");
+      showAlert("Service ID is missing. Please select a service.", "error");
       return;
     }
 
@@ -117,92 +135,90 @@ const Checkout: React.FC = () => {
   }
 
   return (
-    <>
-      <div className="p-6 mx-auto md:pt-25 dark:bg-gray-800">
-        <div className="flex justify-between items-center mb-8">
-          {steps.map((step, index) => (
-            <div key={index} className="flex-1 text-center">
-              <div
-                className={`w-8 h-8 mx-auto flex items-center justify-center rounded-full ${
-                  index <= currentStep
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-300 text-gray-700"
-                }`}
-              >
-                {index + 1}
-              </div>
-              <p
-                className={`mt-2 text-sm ${
-                  index === currentStep ? "font-bold" : ""
-                }`}
-              >
-                {step}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="border rounded-lg shadow-md bg-white">
-          {currentStep === 0 && (
-            <SummaryStep
-              selectedDate={selectedDate}
-              totalPrice={totalPrice}
-              fee={serviceFee}
-              detailService={detailService || ({} as Service)}
-            />
-          )}
-          {currentStep === 1 && user && (
-            <ConfirmStep
-              selectedDate={selectedDate}
-              servicePrice={Number(detailService?.price)}
-              totalPrice={totalPrice}
-              fee={serviceFee}
-              user={user}
-              detailService={detailService || ({} as Service)}
-              handlePayment={handlePayment}
-              order_id={orderId}
-            />
-          )}
-          {currentStep === 2 && (
-            <CompleteStep
-              user={user || ({} as User)}
-              detailService={detailService || ({} as Service)}
-              result={result || ({} as TransactionResult)}
-              selectedDate={selectedDate}
-              order_id={orderId}
-              totalPrice={totalPrice}
-            />
-          )}
-        </div>
-
-        <div className="mt-6 flex justify-between">
-          <button
-            disabled={currentStep === 0}
-            onClick={goToPreviousStep}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 disabled:opacity-50"
-          >
-            Back
-          </button>
-          {currentStep < steps.length - 1 ? (
-            <button
-              onClick={goToNextStep}
-              disabled={currentStep === 1 && !isPaid}
-              className={`px-4 py-2 ${
-                currentStep === 1 && !isPaid
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
-              } rounded-md`}
+    <div className="p-6 max-w-4xl mx-auto mt-15 md:mt-20">
+      <div className="flex justify-between items-center mb-8">
+        {steps.map((step, index) => (
+          <div key={index} className="flex-1 text-center">
+            <div
+              className={`w-8 h-8 mx-auto flex items-center justify-center rounded-full ${
+                index <= currentStep
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-300 text-gray-700"
+              }`}
             >
-              Next
-            </button>
-          ) : (
-            <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-              Finish
-            </button>
-          )}
-        </div>
+              {index + 1}
+            </div>
+            <p
+              className={`mt-2 text-sm ${
+                index === currentStep ? "font-bold" : ""
+              }`}
+            >
+              {step}
+            </p>
+          </div>
+        ))}
       </div>
-    </>
+
+      <div className="border rounded-lg shadow-md bg-white">
+        {currentStep === 0 && (
+          <SummaryStep
+            selectedDate={selectedDate}
+            totalPrice={totalPrice}
+            fee={serviceFee}
+            detailService={detailService || ({} as Service)}
+          />
+        )}
+        {currentStep === 1 && user && (
+          <ConfirmStep
+            selectedDate={selectedDate}
+            servicePrice={Number(detailService?.price)}
+            totalPrice={totalPrice}
+            fee={serviceFee}
+            user={user}
+            detailService={detailService || ({} as Service)}
+            handlePayment={handlePayment}
+            order_id={orderId}
+          />
+        )}
+        {currentStep === 2 && (
+          <CompleteStep
+            user={user || ({} as User)}
+            detailService={detailService || ({} as Service)}
+            result={result || ({} as TransactionResult)}
+            selectedDate={selectedDate}
+            order_id={orderId}
+            totalPrice={totalPrice}
+          />
+        )}
+      </div>
+
+      <div className="mt-6 flex justify-between">
+        <button
+          disabled={currentStep === 0}
+          onClick={goToPreviousStep}
+          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 disabled:opacity-50"
+        >
+          Back
+        </button>
+        {currentStep < steps.length - 1 ? (
+          <button
+            onClick={goToNextStep}
+            disabled={currentStep === 1 && !isPaid}
+            className={`px-4 py-2 ${
+              currentStep === 1 && !isPaid
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            } rounded-md`}
+          >
+            Next
+          </button>
+        ) : (
+          <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+            Finish
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
